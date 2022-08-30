@@ -62,4 +62,8 @@ class User extends Authenticatable
             get:fn($value)=>Str::title($value),
         );
     }
+
+    protected function role(){
+        return $this->belongsTo(Role::class,'role_id','id');
+    }
 }

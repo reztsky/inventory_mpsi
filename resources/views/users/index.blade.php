@@ -37,9 +37,9 @@
                                 <td>{{$user->no_telfon}}</td>
                                 <td>
                                     <div class="gap-2">
-                                        <button class="btn-success btn btn-sm my-1 my-md-0">Detail</button>
-                                        <button class="btn btn-warning btn-sm my-1 my-md-0">Edit</button>
-                                        <button class="btn btn-danger btn-sm my-1 my-md-0">Delete</button>
+                                        <a href="{{route('user.show',$user->id)}}" class="btn-success btn btn-sm my-1 my-md-0">Detail</a>
+                                        <a href="{{route('user.edit',$user->id)}}"  class="btn btn-warning btn-sm my-1 my-md-0">Edit</a>
+                                        <a href="{{route('user.delete',$user->id)}}" class="btn-delete btn btn-danger btn-sm my-1 my-md-0">Delete</a>
                                     </div>
                                 </td>
                             </tr>
@@ -63,6 +63,18 @@
             if (datatablesSimple) {
                 new simpleDatatables.DataTable(datatablesSimple);
             }
+
+            deleteButton();
         });
+
+        function deleteButton() {
+            const btn_deletes=document.getElementsByClassName('btn-delete');
+            
+            for (const btn_delete of btn_deletes){
+                btn_delete.addEventListener('click', event => {
+                   if(!confirm('Yakin ingin menghapus data ?')) event.preventDefault()
+                })
+            }
+        }
     </script>
 @endpush

@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class CreateUserRequest extends FormRequest
+class UpdateUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -31,8 +31,8 @@ class CreateUserRequest extends FormRequest
             'jenis_kelamin'=>['required',Rule::in(['L','P'])],
             'alamat'=>'required',
             'no_telfon'=>'required|numeric',
-            'username'=>'required|unique:users,username',
-            'password'=>'required|min:6',
+            'username'=>'required',
+            'password'=>'nullable',
         ];
     }
 }
