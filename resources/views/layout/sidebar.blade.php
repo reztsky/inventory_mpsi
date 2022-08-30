@@ -34,7 +34,7 @@
                 </div>
                 <div id="MasterMenu">
                     <div class="sb-sidenav-menu-heading">Master</div>
-                    <a href="" class="nav-link">
+                    <a href="{{route('barang.index')}}" class="nav-link">
                         <div class="sb-nav-link-icon"><i class="fa-solid fa-boxes-stacked"></i></div>
                         Barang
                     </a>

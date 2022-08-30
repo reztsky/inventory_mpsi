@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BarangController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserController;
@@ -48,5 +49,19 @@ Route::group([
         Route::put('/update/{id}','update')->name('update');
         Route::get('/delete/{id}','delete')->name('delete');
     });
+
+    Route::group([
+        'as'=>'barang.',
+        'controller'=>BarangController::class,
+        'prefix'=>'/barang',
+    ], function(){
+        Route::get('/','index')->name('index');
+        Route::get('/create','create')->name('create');
+        Route::get('/detail/{id}','show')->name('show');
+        Route::post('/store','store')->name('store');
+        Route::get('/edit/{id}','edit')->name('edit');
+        Route::put('/update/{id}','update')->name('update');
+        Route::get('/delete/{id}','delete')->name('delete');
+    }); 
 });
 
