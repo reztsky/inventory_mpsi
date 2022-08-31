@@ -31,8 +31,8 @@
                         </div>
                         <div class="mb-2">
                             <label for="" class="form-label">Keterangan Barang</label>
-                            <input type="text" class="form-control" placeholder="Keterangan Barang" name="keteranan_barang" value="{{old('keteranan_barang')}}">
-                            @error('keteranan_barang')
+                            <input type="text" class="form-control" placeholder="Keterangan Barang" name="keterangan_barang" value="{{old('keterangan_barang')}}">
+                            @error('keterangan_barang')
                                 <div class="form-text text-danger">{{$message}}</div>
                             @enderror
                         </div>

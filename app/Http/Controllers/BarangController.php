@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateBarangRequest;
+use App\Http\Requests\UpdateBarangRequest;
 use App\Models\Barang;
 use App\Services\ToastServices;
 use Illuminate\Http\Request;
@@ -36,19 +37,25 @@ class BarangController extends Controller
     
     public function show($id)
     {
-        //
+        $barang=Barang::findOrFail($id)->toArray();
+        return view('barangs.detail',compact('barang'));
     }
 
     
     public function edit($id)
     {
-        //
+        $barang=Barang::findOrFail($id);
+        return view('barangs.edit',compact('barang'));
     }
 
     
-    public function update(Request $request, $id)
+    public function update(UpdateBarangRequest $request, $id)
     {
-        //
+        $barang=Barang::findOrFail($id)->update($request->validated());
+        if(!$barang){
+            return redirect()->route('barang.index')->with('message',ToastServices::failed('Mengupdate'));
+        }
+        return redirect()->route('barang.index')->with('message',ToastServices::success('Mengupdate'));
     }
 
     
