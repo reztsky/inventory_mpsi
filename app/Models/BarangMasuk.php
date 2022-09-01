@@ -16,6 +16,7 @@ class BarangMasuk extends Model
         'nama_penerima',
         'tanggal_diterima',
         'bukti_terima',
+        'inserted_by',
     ];
 
     public function barang(){

@@ -18,7 +18,7 @@
                 </div>
             </div>
             <hr>
-            <form action="{{route('barangMasuk.store')}}" method="post">
+            <form action="{{route('barangMasuk.store')}}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
                     <div class="col-md-6 col-12">
@@ -31,14 +31,43 @@
                             <label for="" class="form-label">Jumlah</label>
                             <input type="number" class="form-control" name="jumlah" placeholder="Jumlah">
                             @error('jumlah')
-                                <div class="form-text tex-danger">{{$message}}</div>
+                                <div class="form-text text-danger">{{$message}}</div>
                             @enderror
                         </div>
                         <div class="mb-2">
                             <label for="" class="form-label">Barang Dari</label>
                             <input type="text" class="form-control" name="barang_dari" placeholder="Barang Dari">
                             @error('barang_dari')
-                                <div class="form-text tex-danger">{{$message}}</div>
+                                <div class="form-text text-danger">{{$message}}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-12">
+                        <div class="mb-2">
+                            <label for="" class="form-label">Nama Penerima</label>
+                            <input type="text" class="form-control" name="nama_penerima" placeholder="Nama Penerima">
+                            @error('nama_penerima')
+                                <div class="form-text text-danger">{{$message}}</div>
+                            @enderror
+                        </div>
+                        <div class="mb-2">
+                            <label for="" class="form-label">Tanggal Diterima</label>
+                            <input type="date" class="form-control" name="tanggal_diterima">
+                            @error('tanggal_diterima')
+                                <div class="form-text text-danger">{{$message}}</div>
+                            @enderror
+                        </div>
+                        <div class="mb-2">
+                            <label for="" class="form-label">Bukti Terima</label>
+                            <input type="file" name="bukti_terima" id="" class="form-control">
+                            <div class="form-text">
+                                <ul class="list-unstyled">
+                                    <li>Maksimal File 2MB</li>
+                                    <li>Format File Foto <span class="fw-italic">(jpg, png, jpeg)</span> </li>
+                                </ul>
+                            </div>
+                            @error('bukti_terima')
+                                <div class="form-text text-danger">{{$message}}</div>
                             @enderror
                         </div>
                     </div>

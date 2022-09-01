@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('nama_penerima');
             $table->date('tanggal_diterima');
             $table->string('bukti_terima');
+            $table->bigInteger('inserted_by');
             $table->timestamps();
         });
     }

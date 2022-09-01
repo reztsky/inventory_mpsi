@@ -33,7 +33,7 @@
                         @forelse ($barangMasuks as $barangMasuk)
                             <tr>
                                 <td>{{$loop->iteration}}</td>
-                                <td>{{$loop->tanggal_diterma}}</td>
+                                <td>{{$barangMasuk->tanggal_diterima}}</td>
                                 <td>{{$barangMasuk->barang->nama_barang}}</td>
                                 <td>{{$barangMasuk->jumlah}}</td>
                                 <td>{{$barangMasuk->barang_dari}}</td>
