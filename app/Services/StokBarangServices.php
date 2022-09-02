@@ -10,4 +10,10 @@ class StokBarangServices{
         $barang->stok=$barang->stok+$jumlah;
         $barang->save();
     }
+
+    public static function decrement($idBarang,$jumlah){
+        $barang=Barang::findOrFail($idBarang);
+        $barang->stok=$barang->stok-$jumlah;
+        $barang->save();
+    }
 }

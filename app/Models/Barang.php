@@ -26,6 +26,12 @@ class Barang extends Model
         'updated_at'=>'datetime:d/m/Y H:i:s',
     ];
 
+    // protected function harga():Attribute{
+    //     return Attribute::make(
+    //         get:fn($value)=>"Rp. ".number_format($value,2,',','.'),
+    //     );
+    // }
+
     public function scopeSearchItem($query,$keyword){
         return $query
                 ->select('id')

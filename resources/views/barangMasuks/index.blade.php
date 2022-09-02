@@ -33,15 +33,15 @@
                         @forelse ($barangMasuks as $barangMasuk)
                             <tr>
                                 <td>{{$loop->iteration}}</td>
-                                <td>{{$barangMasuk->tanggal_diterima}}</td>
-                                <td>{{$barangMasuk->barang->nama_barang}}</td>
-                                <td>{{$barangMasuk->jumlah}}</td>
-                                <td>{{$barangMasuk->barang_dari}}</td>
+                                <td>{{$barangMasuk['tanggal_diterima']}}</td>
+                                <td>{{$barangMasuk['barang']['nama_barang']}}</td>
+                                <td>{{$barangMasuk['jumlah']}}</td>
+                                <td>{{$barangMasuk['barang_dari']}}</td>
                                 <td>
                                     <div class="gap-2">
-                                        <a href="{{route('barangMasuk.show',$barangMasuk->id)}}" class="btn-success btn btn-sm my-1 my-md-0">Detail</a>
-                                        <a href="{{route('barangMasuk.edit',$barangMasuk->id)}}"  class="btn btn-warning btn-sm my-1 my-md-0">Edit</a>
-                                        <a href="{{route('barangMasuk.delete',$barangMasuk->id)}}" class="btn-delete btn btn-danger btn-sm my-1 my-md-0">Delete</a>
+                                        <a href="{{route('barangMasuk.show',$barangMasuk['id'])}}" class="btn-success btn btn-sm my-1 my-md-0">Detail</a>
+                                        <a href="{{route('barangMasuk.edit',$barangMasuk['id'])}}"  class="btn btn-warning btn-sm my-1 my-md-0">Edit</a>
+                                        <a href="{{route('barangMasuk.delete',$barangMasuk['id'])}}" class="btn-delete btn btn-danger btn-sm my-1 my-md-0">Delete</a>
                                     </div>
                                 </td>
                             </tr>
