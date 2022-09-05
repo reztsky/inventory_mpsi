@@ -34,7 +34,7 @@ class Barang extends Model
 
     public function scopeSearchItem($query,$keyword){
         return $query
-                ->select('id')
+                ->select('id','harga')
                 ->selectRaw('CONCAT(nama_barang," ",harga,"/",satuan) as name')
                 ->where('nama_barang','LIKE',"%{$keyword}%");
     }

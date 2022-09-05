@@ -69,8 +69,4 @@ class BarangMasukController extends Controller
         return redirect()->route('barangMasuk.index')->with('message',ToastServices::success('Menghapus'));
     }
 
-    public function autoComplete(Request $request){
-        $barangs=Barang::searchItem($request->keyword)->get();
-        return response()->json($barangs);
-    }
 }

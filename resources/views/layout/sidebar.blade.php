@@ -13,7 +13,7 @@
                         <div class="sb-nav-link-icon"><i class="fa-solid fa-warehouse"></i></div>
                         Barang Masuk
                     </a>
-                    <a href="" class="nav-link">
+                    <a href="{{route('barangKeluar.index')}}" class="nav-link">
                         <div class="sb-nav-link-icon"><i class="fa-solid fa-truck-ramp-box"></i></div>
                         Barang Keluar
                     </a>
