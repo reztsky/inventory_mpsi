@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateBarangKeluarRequest;
 use App\Models\BarangKeluar;
+use App\Services\CreateBarangKeluarServices;
 use App\Services\ToastServices;
 use Illuminate\Http\Request;
 
@@ -19,8 +20,9 @@ class BarangKeluarController extends Controller
     }
 
     public function store(CreateBarangKeluarRequest $request){
-
-        dd($request);
+        $createBarangKeluarServices=new CreateBarangKeluarServices($request);
+        $barangKeluar=$createBarangKeluarServices->store();
+        
         if(!$barangKeluar){
             return redirect()->route('barangKeluar.index')->with('message',ToastServices::failed('Menambahkan'));
         }

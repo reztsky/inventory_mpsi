@@ -10,7 +10,7 @@ class BarangKeluar extends Model
     use HasFactory;
 
     protected $fillable=[
-        'no_tranksaksi',
+        'no_transaksi',
         'tanggal_keluar',
         'tujuan_kirim',
         'total_harga',

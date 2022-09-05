@@ -39,6 +39,9 @@
                         <div class="mb-2">
                             <label for="" class="form-label">Total Harga</label>
                             <input type="text" class="form-control" placeholder="Total Harga" name="total_harga" readonly v-model="total">
+                            @error('total_harga')
+                                <div class="form-text text-danger">{{$message}}</div>
+                            @enderror
                         </div>
                     </div>
                     <div class="col-md-8 col-12" id="cardBarang"> 
@@ -62,7 +65,7 @@
                                                 <div class="mb-2">
                                                     <label for="" class="form-label">Jumlah</label>
                                                     <input type="number" class="form-control" placeholder="Jumlah" name="jumlah[]" @keyup="calculateSubTotal(index)" v-model="barang.jumlah">
-                                                    @error('jumlah')
+                                                    @error('jumlah.*')
                                                         <div class="form-text text-danger">{{$message}}</div>
                                                     @enderror
                                                 </div>
@@ -73,6 +76,9 @@
                                                     <input type="text" class="form-control" placeholder="Sub Total" readonly name="sub_total[]" v-model="barang.sub_total">
                                                     <button  v-show="index !=0 " class="btn btn-sm btn-danger input-group-text" @click="removeBarang(index)">X</button>
                                                 </div>
+                                                @error('sub_total.*')
+                                                    <div class="form-text text-danger">{{$message}}</div>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
