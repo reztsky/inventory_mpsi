@@ -1,8 +1,9 @@
 <?php
-namespace App\Services;
+namespace App\Services\BarangKeluar;
 
 use App\Models\BarangKeluar;
 use App\Models\DetailBarangKeluar;
+use App\Services\StokBarangServices;
 
 class CreateBarangKeluarServices{
 

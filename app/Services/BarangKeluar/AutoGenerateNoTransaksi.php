@@ -1,5 +1,5 @@
 <?php
-namespace App\Services;
+namespace App\Services\BarangKeluar;
 
 use App\Models\BarangKeluar;
 

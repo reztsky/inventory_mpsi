@@ -16,8 +16,8 @@ class BarangKeluar extends Model
         'total_harga',
     ];
 
-    public function detailBarangKeluar(){
-        $this->hasMany(DetailBarangKeluar::class,'barang_keluar_id','id');
+    public function details(){
+       return $this->hasMany(DetailBarangKeluar::class,'barang_keluar_id','id');
     }
 
     public function scopeTable($query){

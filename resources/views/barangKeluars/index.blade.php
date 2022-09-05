@@ -40,7 +40,7 @@
                                 <td>
                                     <div class="gap-2">
                                         <a href="{{route('barangKeluar.show',$barangKeluar['id'])}}" class="btn-success btn btn-sm my-1 my-md-0">Detail</a>
-                                        <a href="{{route('barangKeluar.edit',$barangKeluar['id'])}}"  class="btn btn-warning btn-sm my-1 my-md-0">Edit</a>
+                                        {{-- <a href="{{route('barangKeluar.edit',$barangKeluar['id'])}}"  class="btn btn-warning btn-sm my-1 my-md-0">Edit</a> --}}
                                         <a href="{{route('barangKeluar.delete',$barangKeluar['id'])}}" class="btn-delete btn btn-danger btn-sm my-1 my-md-0">Delete</a>
                                     </div>
                                 </td>
@@ -74,7 +74,7 @@
             
             for (const btn_delete of btn_deletes){
                 btn_delete.addEventListener('click', event => {
-                   if(!confirm('Yakin ingin menghapus data ?')) event.preventDefault()
+                   if(!confirm('Transaksi Barang Keluar Akan Dihapus Permanen, Apakah anda yakin ?')) event.preventDefault()
                 })
             }
         }

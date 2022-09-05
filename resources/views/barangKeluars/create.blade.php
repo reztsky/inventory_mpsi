@@ -45,47 +45,46 @@
                         </div>
                     </div>
                     <div class="col-md-8 col-12" id="cardBarang"> 
-                            <div class="card">
-                                <div class="card-header d-flex justify-content-end">
-                                    <div class="d-flex justify-content-end">
-                                        <button @click="addMore()" type="button" class="btn btn-sm btn-success">Tambah Barang</button>
-                                    </div>
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-end">
+                                <div class="d-flex justify-content-end">
+                                    <button @click="addMore()" type="button" class="btn btn-sm btn-success">Tambah Barang</button>
                                 </div>
-                                <div class="card-body">
-                                    <div v-for="(barang,index) in barangs">      
-                                        <div class="row">
-                                            <div class="col-md-5 col-sm-5 col-12">
-                                                <div class="mb-2">
-                                                    <label for="" class="form-label">Barang</label>
-                                                    <input type="text" class="form-control search" placeholder="Barang" @keyup="searchBarang(index)" @focusout="setBarangId(index)">
-                                                    <input type="hidden" class="barang-id" name="barang_id[]" v-model="barang.barang_id">
-                                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div v-for="(barang,index) in barangs">      
+                                    <div class="row">
+                                        <div class="col-md-5 col-sm-5 col-12">
+                                            <div class="mb-2">
+                                                <label for="" class="form-label">Barang</label>
+                                                <input type="text" class="form-control search" placeholder="Barang" @keyup="searchBarang(index)" @focusout="setBarangId(index)">
+                                                <input type="hidden" class="barang-id" name="barang_id[]" v-model="barang.barang_id">
                                             </div>
-                                            <div class="col-md-4 col-sm-5 col-12">
-                                                <div class="mb-2">
-                                                    <label for="" class="form-label">Jumlah</label>
-                                                    <input type="number" class="form-control" placeholder="Jumlah" name="jumlah[]" @keyup="calculateSubTotal(index)" v-model="barang.jumlah">
-                                                    @error('jumlah.*')
-                                                        <div class="form-text text-danger">{{$message}}</div>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3 col-sm-5 col-12">
-                                                <label for="" class="form-label">Sub Total</label>
-                                                <div class="mb-2 input-group">
-                                                    <input type="text" class="form-control" placeholder="Sub Total" readonly name="sub_total[]" v-model="barang.sub_total">
-                                                    <button  v-show="index !=0 " class="btn btn-sm btn-danger input-group-text" @click="removeBarang(index)">X</button>
-                                                </div>
-                                                @error('sub_total.*')
+                                        </div>
+                                        <div class="col-md-4 col-sm-5 col-12">
+                                            <div class="mb-2">
+                                                <label for="" class="form-label">Jumlah</label>
+                                                <input type="number" class="form-control" placeholder="Jumlah" name="jumlah[]" @keyup="calculateSubTotal(index)" v-model="barang.jumlah">
+                                                @error('jumlah.*')
                                                     <div class="form-text text-danger">{{$message}}</div>
                                                 @enderror
                                             </div>
                                         </div>
+                                        <div class="col-md-3 col-sm-5 col-12">
+                                            <label for="" class="form-label">Sub Total</label>
+                                            <div class="mb-2 input-group">
+                                                <input type="text" class="form-control" placeholder="Sub Total" readonly name="sub_total[]" v-model="barang.sub_total">
+                                                <button  v-show="index !=0 " class="btn btn-sm btn-danger input-group-text" @click="removeBarang(index)">X</button>
+                                            </div>
+                                            @error('sub_total.*')
+                                                <div class="form-text text-danger">{{$message}}</div>
+                                            @enderror
+                                        </div>
                                     </div>
                                 </div>
-                            </div>                     
-                            <hr>
-                        
+                            </div>
+                        </div>                     
+                        <hr>
                     </div>
                 </div>
                 <hr>

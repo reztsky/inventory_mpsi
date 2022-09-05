@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateBarangKeluarRequest;
 use App\Models\BarangKeluar;
-use App\Services\CreateBarangKeluarServices;
+use App\Services\BarangKeluar\CreateBarangKeluarServices;
+use App\Services\BarangKeluar\DeleteBarangKeluarServices;
 use App\Services\ToastServices;
 use Illuminate\Http\Request;
 
@@ -19,6 +20,11 @@ class BarangKeluarController extends Controller
         return view('barangKeluars.create');
     }
 
+    public function show($id){
+        $barangKeluar=BarangKeluar::with(['details.barang'])->whereId($id)->get()->first();
+        return view('barangKeluars.detail',compact('barangKeluar'));
+    }
+
     public function store(CreateBarangKeluarRequest $request){
         $createBarangKeluarServices=new CreateBarangKeluarServices($request);
         $barangKeluar=$createBarangKeluarServices->store();
@@ -30,7 +36,8 @@ class BarangKeluarController extends Controller
     }
 
     public function edit($id){
-        return view('barangKeluars.edit');
+        $barangKeluar=BarangKeluar::with('details.barang')->findOrFail($id);
+        return view('barangKeluars.edit',compact('barangKeluar'));
     }
 
     public function update(Request $request,$id){
@@ -43,11 +50,12 @@ class BarangKeluarController extends Controller
     }
 
     public function delete($id){
-
-        $barangKeluar='';
+        $deleteBarangKeluarService=new DeleteBarangKeluarServices($id);
+        $barangKeluar=$deleteBarangKeluarService->delete();
+        
         if(!$barangKeluar){
-            return redirect()->route('barang.index')->with('message',ToastServices::failed('Menghapus'));
+            return redirect()->route('barangKeluar.index')->with('message',ToastServices::failed('Menghapus'));
         }
-        return redirect()->route('barang.index')->with('message',ToastServices::success('Menghapus'));
+        return redirect()->route('barangKeluar.index')->with('message',ToastServices::success('Menghapus'));
     }
 }
