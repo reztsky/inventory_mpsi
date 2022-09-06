@@ -42,10 +42,12 @@
                         <div class="sb-nav-link-icon"><i class="fa-solid fa-wand-sparkles"></i></div>
                         Roles
                     </a>
-                    <a href="{{route('user.index')}}" class="nav-link">
-                        <div class="sb-nav-link-icon"><i class="fa-solid fa-users"></i></div>
-                        Users
-                    </a>
+                    @can('isSuperAdmin')
+                        <a href="{{route('user.index')}}" class="nav-link">
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-users"></i></div>
+                            Users
+                        </a>
+                    @endcan
                 </div>
             </div>
         </div>

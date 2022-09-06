@@ -77,7 +77,7 @@
                             <label for="" class="form-label">Role</label>
                             <select name="role_id" id="" class="form-select">
                                 @foreach ($roles as $role)
-                                    <option value="{{$role->id}}" {{$user->role_id==$role->id ?: 'selected'}}>{{$role->role_name}}</option>    
+                                    <option value="{{$role->id}}" {{$user->role_id==$role->id ? 'selected' : ''}}>{{$role->role_name}}</option>    
                                 @endforeach
                             </select>
                             @error('role_id')

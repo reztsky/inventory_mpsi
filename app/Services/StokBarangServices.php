@@ -20,9 +20,10 @@ class StokBarangServices{
     public static function checkStok($idBarang,$jumlah){
         $barang=Barang::findOrFail($idBarang);
         if($barang->stok<$jumlah){
+            //Lolos Check Validation
             return false;
         } 
-        
+
         return true;
     }
 }

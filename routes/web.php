@@ -42,6 +42,7 @@ Route::group([
         'as'=>'user.',
         'controller'=>UserController::class,
         'prefix'=>'/user',
+        'middleware'=>'isSuperAdmin',
     ], function(){
         Route::get('/','index')->name('index');
         Route::get('/create','create')->name('create');

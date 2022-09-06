@@ -25,18 +25,20 @@ class CreateBarangKeluarRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        $rules=[
             'no_transaksi'=>'required',
             'tanggal_keluar'=>'required|before:tomorrow|date',
             'tujuan_kirim'=>'required',
             'total_harga'=>'required|numeric|min:1',
-            'barang_id'=>'required|array|min:1',
-            'barang_id.*'=>'required|numeric|min:1',
-            'jumlah'=>['required','array','min:1',new UnderStok($this->barang_id)],
-            'jumlah.*'=>['required','numeric'],
-            'sub_total'=>'required|array|min:1',
-            'sub_total.*'=>'required|numeric|min:1'
         ];
+
+        foreach ($this->barang_id as $index => $barang_id) {
+            $rules['barang_id.'.$index]=['required','numeric',];
+            $rules['jumlah.'.$index]=['required','numeric',new UnderStok($barang_id)];
+            $rules['sub_total.'.$index]=['required','numeric','min:1'];
+        }
+
+        return $rules;
     }
 
     protected function prepareForValidation()

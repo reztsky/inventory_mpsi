@@ -13,7 +13,7 @@ class UnderStok implements Rule
      *
      * @return void
      */
-    public function __construct(public $barangs_id)
+    public function __construct(protected $barang_id)
     {
         //
     }
@@ -27,10 +27,9 @@ class UnderStok implements Rule
      */
     public function passes($attribute, $value)
     {
-        //return StokBarangServices::checkStok($this->barangs_id[0],$value[0]);
-        foreach ($value as $index=>$jumlah) {
-            StokBarangServices::checkStok($this->barangs_id[$index],$jumlah);
-        }
+        
+        return StokBarangServices::checkStok($this->barang_id,$value);
+
     }
 
     /**
