@@ -22,4 +22,13 @@ class BuktiTerimaServices{
 
         return $this->upload($buktiTerima);
     }
+
+    public function deleteFoto($id){
+        $barangMasuk=BarangMasuk::findOrFail($id);
+        if(Storage::disk('public')->exists("{$this->path}/{$barangMasuk->bukti_terima}")){
+            Storage::disk('public')->delete("{$this->path}/{$barangMasuk->bukti_terima}");
+            return true;
+        }
+        return false;
+    }
 }

@@ -10,8 +10,6 @@ class BarangMasuk extends Model
     use HasFactory;
 
     protected $fillable=[
-        'barang_id',
-        'jumlah',
         'barang_dari',
         'nama_penerima',
         'tanggal_diterima',
@@ -19,17 +17,12 @@ class BarangMasuk extends Model
         'inserted_by',
     ];
 
-    // protected $hidden=[
-    //     'barang_id',
-    //     'inserted_by',
-    // ];
-
     protected $casts=[
         'tanggal_diterima'=>'date:d-M-Y'
     ];
 
-    public function barang(){
-        return $this->belongsTo(Barang::class,'barang_id','id');
+    public function details(){
+        return $this->hasMany(DetailBarangMasuk::class,'barang_masuk_id','id');
     }
 
     public function user(){
@@ -37,9 +30,8 @@ class BarangMasuk extends Model
     }
 
     public function scopeTable($query){
-        return $query->select(['id','barang_id','jumlah','barang_dari','tanggal_diterima'])
-                        ->with('barang');
+        return $query->select(['id','barang_dari','tanggal_diterima'])
+                    ->with('details.barang');
     }
-
 
 }

@@ -27,8 +27,8 @@
                     </a>
                     <div class="collapse" id="collapseReports" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="layout-static.html">Static Navigation</a>
-                            <a class="nav-link" href="layout-sidenav-light.html">Light Sidenav</a>
+                            <a class="nav-link" href="{{route('reportBarangMasuk.index')}}"><div class="sb-nav-link-icon"><i class="fa-solid fa-chart-column"></i></div> Barang Masuk</a>
+                            <a class="nav-link" href="{{route('reportBarangKeluar.index')}}"><div class="sb-nav-link-icon"><i class="fa-solid fa-chart-line"></i></div> Barang Keluar</a>
                         </nav>
                     </div>
                 </div>

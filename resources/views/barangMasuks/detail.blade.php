@@ -22,20 +22,37 @@
                 </div>
                 <hr>
                 <div class="row">
-                    <div class="col-md-6 col-12">
+                    <div class="col-md-8 col-12">
                         <dl class="row">
                             <dt class="col-md-4 col-sm-6 col-12">Ditambahkan Oleh</dt>
                             <dd class="col-md-8 col-sm-6 col-12">{{$barangMasuk['user']['name']}}</dd>
-                            <dt class="col-md-4 col-sm-6 col-12">Barang</dt>
-                            <dd class="col-md-8 col-sm-6 col-12">{{$barangMasuk['barang']['nama_barang']}} - {{$barangMasuk['barang']['harga']}}/{{$barangMasuk['barang']['satuan']}}</dd>
-                            <dt class="col-md-4 col-sm-6 col-12">Jumlah</dt>
-                            <dd class="col-md-8 col-sm-6 col-12">{{$barangMasuk['jumlah']}}</dd>
                             <dt class="col-md-4 col-sm-6 col-12">Barang Dari</dt>
                             <dd class="col-md-8 col-sm-6 col-12">{{$barangMasuk['barang_dari']}}</dd>
                             <dt class="col-md-4 col-sm-6 col-12">Nama Penerima</dt>
                             <dd class="col-md-8 col-sm-6 col-12">{{$barangMasuk['nama_penerima']}}</dd>
                             <dt class="col-md-4 col-sm-6 col-12">Tanggal Diterima</dt>
                             <dd class="col-md-8 col-sm-6 col-12">{{$barangMasuk['tanggal_diterima']}}</dd>
+                            <dt class="col-md-4 col-sm-6 col-12">Details</dt>
+                            <dd class="col-md-8 col-sm-6 col-12">
+                                <table class="table table-bordered my-2">
+                                    <thead>
+                                        <tr>
+                                            <th>No.</th>
+                                            <th>Barang</th>
+                                            <th>Jumlah</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($barangMasuk['details'] as $detail)
+                                            <tr>
+                                                <td>{{$loop->iteration}}</td>
+                                                <td>{{$detail['barang']['nama_barang']}} {{$detail['barang']['harga']}}/{{$detail['barang']['satuan']}}</td>
+                                                <td>{{$detail['jumlah']}}</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </dd>
                             <dt class="col-md-4 col-sm-6 col-12">Bukti Terima</dt>
                             <dd class="col-md-8 col-sm-6 col-12">
                                 <img src="{{asset('storage/BuktiTerima/'.$barangMasuk['bukti_terima'])}}" alt="" class="img-thumbnail" width="200px">

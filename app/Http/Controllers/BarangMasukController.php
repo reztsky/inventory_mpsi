@@ -4,14 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateBarangMasukRequest;
 use App\Http\Requests\UpdateBarangMasukRequest;
-use App\Models\Barang;
 use App\Models\BarangMasuk;
-use App\Services\BuktiTerimaServices;
+use App\Services\BarangMasuk\CreateBarangMasukServices;
+use App\Services\BarangMasuk\DeleteBarangMasukServices;
 use App\Services\StokBarangServices;
 use App\Services\ToastServices;
 use App\Services\UpdateBarangMasukServices;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class BarangMasukController extends Controller
 {
@@ -25,19 +23,14 @@ class BarangMasukController extends Controller
     }
 
     public function show($id){
-        $barangMasuk=BarangMasuk::with(['barang','user'])->findOrFail($id)->toArray();
+        $barangMasuk=BarangMasuk::with(['details.barang','user'])->findOrFail($id)->toArray();
         return view('barangMasuks.detail',compact('barangMasuk'));
     }
 
-    public function store(CreateBarangMasukRequest $request,BuktiTerimaServices $buktiTerimaServices){
-        //Prepare For Storing Barang Masuk to DB   
-        $barangMasukForm=$request->safe()->except('bukti_terima');
-        $barangMasukForm['bukti_terima']=$buktiTerimaServices->upload($request->bukti_terima);
-        $barangMasukForm['inserted_by']=Auth::user()->id;
-
-        $barangMasuk=BarangMasuk::create($barangMasukForm);
-        StokBarangServices::increment($request->barang_id,$request->jumlah);
-
+    public function store(CreateBarangMasukRequest $request){
+        $createBarangMasukService=new CreateBarangMasukServices($request);
+        $barangMasuk=$createBarangMasukService->store();
+        
         if(!$barangMasuk){
             return redirect()->route('barangMasuk.index')->with('message',ToastServices::failed('Menambahkan'));
         }
@@ -60,9 +53,7 @@ class BarangMasukController extends Controller
     }
 
     public function delete($id){
-        $barangMasuk=BarangMasuk::findOrFail($id);
-        StokBarangServices::decrement($barangMasuk->barang_id,$barangMasuk->jumlah);
-        $barangMasuk=BarangMasuk::destroy($id);
+        $barangMasuk=(new DeleteBarangMasukServices($id))->delete();
         if(!$barangMasuk){
             return redirect()->route('barangMasuk.index')->with('message',ToastServices::failed('Menghapus'));
         }
