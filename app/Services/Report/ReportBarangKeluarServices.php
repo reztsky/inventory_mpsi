@@ -2,6 +2,7 @@
 namespace App\Services\Report;
 
 use Illuminate\Support\Facades\DB;
+use Rap2hpoutre\FastExcel\FastExcel ;
 
 class ReportBarangKeluarServices{
 
@@ -26,7 +27,20 @@ class ReportBarangKeluarServices{
                 ->get();
     }
 
-    public static function exportExcel($parameter){
+    public static function exportExcel($request){
+        $parameter=[
+            'dari_tanggal'=>$request['dari_tanggal_export'],
+            'sampai_tanggal'=>$request['sampai_tanggal_export'],
+        ];
 
+        
+        $dataExport=self::report($parameter);
+        $filename=self::fileNameExcel($parameter);
+        
+        return (new FastExcel($dataExport))->download($filename);
+    }
+
+    private static function fileNameExcel($parameter){
+        return "Barang Keluar_P_{$parameter['dari_tanggal']}_{$parameter['sampai_tanggal']}.xlsx";
     }
 }
