@@ -8,7 +8,7 @@
             <li class="breadcrumb-item active">Dashboard</li>
         </ol>
         <div class="row">
-            <div class="col-md-6 col-12">
+            <div class="col-md-6 col-12 mb-3 mb-md-0">
                 <div class="bg-white shadow p-3 rounded-3 border border-2">
                     <h5>Barang Masuk</h5>
                     <canvas id="chartBarangMasuk"></canvas>
@@ -42,7 +42,7 @@
                     parsing:{
                         xAxisKey:'periode',
                         yAxisKey:'jumlah'
-                    }
+                    },
                 }
             }
 
