@@ -16,9 +16,11 @@
                         <i class="fa-solid fa-file-circle-question"></i>
                         User Detail
                     </div>
-                    <div class="handle">
-                        <a class="btn btn-sm btn-danger" href="{{route('user.index')}}">Kembali</a>
-                    </div>
+                    @can('isSuperAdmin')
+                        <div class="handle">
+                            <a class="btn btn-sm btn-danger" href="{{route('user.index')}}">Kembali</a>
+                        </div>    
+                    @endcan
                 </div>
                 <hr>
                 

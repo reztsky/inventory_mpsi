@@ -44,15 +44,20 @@ Route::group([
         'as'=>'user.',
         'controller'=>UserController::class,
         'prefix'=>'/user',
-        'middleware'=>'isSuperAdmin',
     ], function(){
-        Route::get('/','index')->name('index');
-        Route::get('/create','create')->name('create');
-        Route::get('/detail/{id}','show')->name('show');
-        Route::post('/store','store')->name('store');
-        Route::get('/edit/{id}','edit')->name('edit');
-        Route::put('/update/{id}','update')->name('update');
-        Route::get('/delete/{id}','delete')->name('delete');
+        
+        Route::group([
+            'middleware'=>'isSuperAdmin',
+        ], function(){
+            Route::get('/','index')->name('index');
+            Route::get('/create','create')->name('create');
+            Route::post('/store','store')->name('store');
+            Route::get('/edit/{id}','edit')->name('edit');
+            Route::put('/update/{id}','update')->name('update');
+            Route::get('/delete/{id}','delete')->name('delete');
+        });
+        
+        Route::get('/detail/{id}','show')->middleware('EnsureProfile')->name('show');
     });
 
     Route::group([
@@ -68,6 +73,7 @@ Route::group([
         Route::put('/update/{id}','update')->name('update');
         Route::get('/delete/{id}','delete')->name('delete');
         Route::get('/auto-complete','autoComplete')->name('autoComplete');
+        Route::get('/export','export')->name('export');
     }); 
 
     Route::group([

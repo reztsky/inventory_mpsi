@@ -13,6 +13,7 @@
                     Barangs Table
                 </div>
                 <div class="handle">
+                    <a href="{{route('barang.export')}}" class="btn btn-sm btn-success">Export</a>
                     <a class="btn btn-sm btn-primary" href="{{route('barang.create')}}">Create</a>
                 </div>
             </div>
