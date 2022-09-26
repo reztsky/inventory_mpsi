@@ -19,6 +19,8 @@ class RoleSeeder extends Seeder
             'role_name'=>'superadmin',
         ],[
             'role_name'=>'admin',
+        ],[
+            'role_name'=>'admin_gudang',
         ]);
     }
 }

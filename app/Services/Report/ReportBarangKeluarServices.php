@@ -40,6 +40,25 @@ class ReportBarangKeluarServices{
         return (new FastExcel($dataExport))->download($filename);
     }
 
+    public static function exportPDF($request){
+        $parameter=[
+            'dari_tanggal'=>$request['dari_tanggal_export'],
+            'sampai_tanggal'=>$request['sampai_tanggal_export'],
+        ];
+
+        $dataExport=self::report($parameter);
+        $filename=self::fileNamePdf($parameter);
+
+        return[
+            'report'=>$dataExport,
+            'fileName'=>$filename,
+        ];  
+    }
+
+    private static function fileNamePdf($parameter){
+        return "Barang Keluar_P_{$parameter['dari_tanggal']}_{$parameter['sampai_tanggal']}.pdf";
+    }
+
     private static function fileNameExcel($parameter){
         return "Barang Keluar_P_{$parameter['dari_tanggal']}_{$parameter['sampai_tanggal']}.xlsx";
     }

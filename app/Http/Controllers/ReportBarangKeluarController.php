@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\Report\ReportBarangKeluarServices;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
 class ReportBarangKeluarController extends Controller
@@ -28,5 +29,17 @@ class ReportBarangKeluarController extends Controller
                         'sampai_tanggal_export'=>'required|after_or_equal:dari_tanggal',
                     ]);
         return ReportBarangKeluarServices::exportExcel($validated);
+    }
+
+    public function exportPdf(Request $request){
+        $validated=$request->validate([
+            'dari_tanggal_export'=>'required',
+            'sampai_tanggal_export'=>'required|after_or_equal:dari_tanggal',
+        ]);
+
+        $exportPdf=ReportBarangKeluarServices::exportPDF($validated);
+
+        $pdf = Pdf::loadView('reportBarangKeluar.pdf',['report'=>$exportPdf['report']]);
+    	return $pdf->download($exportPdf['fileName']);
     }
 }
