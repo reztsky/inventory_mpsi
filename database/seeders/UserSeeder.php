@@ -15,7 +15,7 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        User::create([
+        $user=User::create([
             'name'=>'Sultan Aulia Alfarizki',
             'nik'=>'3578160711980001',
             'jenis_kelamin'=>'L',
@@ -24,5 +24,8 @@ class UserSeeder extends Seeder
             'username'=>'sull_aa',
             'password'=>'123456',
         ]);
+
+        $user->assignRole('superadmin');
+
     }
 }
