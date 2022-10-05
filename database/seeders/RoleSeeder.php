@@ -2,9 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Role;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class RoleSeeder extends Seeder
 {
@@ -15,12 +16,8 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-        Role::create([
-            'role_name'=>'superadmin',
-        ],[
-            'role_name'=>'admin',
-        ],[
-            'role_name'=>'admin_gudang',
-        ]);
+        $permissions=Permission::all();
+        $role=Role::create(['name'=>'superadmin']);
+        // $role->syncPermission
     }
 }

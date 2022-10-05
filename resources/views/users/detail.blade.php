@@ -16,11 +16,9 @@
                         <i class="fa-solid fa-file-circle-question"></i>
                         User Detail
                     </div>
-                    @can('isSuperAdmin')
-                        <div class="handle">
-                            <a class="btn btn-sm btn-danger" href="{{route('user.index')}}">Kembali</a>
-                        </div>    
-                    @endcan
+                    <div class="handle">
+                        <a class="btn btn-sm btn-danger" href="{{route('user.index')}}">Kembali</a>
+                    </div>  
                 </div>
                 <hr>
                 
@@ -38,7 +36,7 @@
                             <dt class="col-md-4 col-sm-6 col-12">Username</dt>
                             <dd class="col-md-8 col-sm-6 col-12">{{$user->username}}</dd>
                             <dt class="col-md-4 col-sm-6 col-12">Role</dt>
-                            <dd class="col-md-8 col-sm-6 col-12">{{$user->role->role_name}}</dd>
+                            <dd class="col-md-8 col-sm-6 col-12">{{$user->roles->first()->name}}</dd>
                         </dl>
                     </div>
                 </div>

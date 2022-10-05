@@ -13,6 +13,14 @@ use App\Services\UpdateBarangMasukServices;
 
 class BarangMasukController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:barangMasuk-list|barangMasuk-create|barangMasuk-edit|barangMasuk-delete', ['only' => ['index','show']]);
+        $this->middleware('permission:barangMasuk-create', ['only' => ['create','store']]);
+        $this->middleware('permission:barangMasuk-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:barangMasuk-delete', ['only' => ['destroy']]);
+    }
+
     public function index(){
         $barangMasuks=BarangMasuk::table()->get()->toArray();
         return view('barangMasuks.index',compact('barangMasuks'));

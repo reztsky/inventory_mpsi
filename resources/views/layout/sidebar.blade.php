@@ -38,16 +38,14 @@
                         <div class="sb-nav-link-icon"><i class="fa-solid fa-boxes-stacked"></i></div>
                         Barang
                     </a>
-                    <a href="" class="nav-link">
+                    <a href="{{route('role.index')}}" class="nav-link">
                         <div class="sb-nav-link-icon"><i class="fa-solid fa-wand-sparkles"></i></div>
                         Roles
                     </a>
-                    @can('isSuperAdmin')
-                        <a href="{{route('user.index')}}" class="nav-link">
-                            <div class="sb-nav-link-icon"><i class="fa-solid fa-users"></i></div>
-                            Users
-                        </a>
-                    @endcan
+                    <a href="{{route('user.index')}}" class="nav-link">
+                        <div class="sb-nav-link-icon"><i class="fa-solid fa-users"></i></div>
+                        Users
+                    </a>
                 </div>
             </div>
         </div>

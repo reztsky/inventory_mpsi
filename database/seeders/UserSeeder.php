@@ -16,7 +16,6 @@ class UserSeeder extends Seeder
     public function run()
     {
         User::create([
-            'role_id'=>1,
             'name'=>'Sultan Aulia Alfarizki',
             'nik'=>'3578160711980001',
             'jenis_kelamin'=>'L',

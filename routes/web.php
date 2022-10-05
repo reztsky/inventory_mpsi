@@ -7,6 +7,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ReportBarangKeluarController;
 use App\Http\Controllers\ReportBarangMasukController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -44,21 +45,31 @@ Route::group([
         'as'=>'user.',
         'controller'=>UserController::class,
         'prefix'=>'/user',
+        'middleware'=>['role:superadmin'],
     ], function(){
-        
-        Route::group([
-            'middleware'=>'isSuperAdmin',
-        ], function(){
-            Route::get('/','index')->name('index');
-            Route::get('/create','create')->name('create');
-            Route::post('/store','store')->name('store');
-            Route::get('/edit/{id}','edit')->name('edit');
-            Route::put('/update/{id}','update')->name('update');
-            Route::get('/delete/{id}','delete')->name('delete');
-        });
-        
-        Route::get('/detail/{id}','show')->middleware('EnsureProfile')->name('show');
+        Route::get('/','index')->name('index');
+        Route::get('/create','create')->name('create');
+        Route::post('/store','store')->name('store');
+        Route::get('/edit/{id}','edit')->name('edit');
+        Route::put('/update/{id}','update')->name('update');
+        Route::get('/delete/{id}','delete')->name('delete');
     });
+
+    Route::group([
+        'as'=>'role.',
+        'controller'=>RoleController::class,
+        'prefix'=>'/role',
+        'middleware'=>['role:superadmin'],
+    ], function(){
+        Route::get('/','index')->name('index');
+        Route::get('/create','create')->name('create');
+        Route::post('/store','store')->name('store');
+        Route::get('/edit/{id}','edit')->name('edit');
+        Route::put('/update/{id}','update')->name('update');
+        Route::get('/delete/{id}','delete')->name('delete');
+    });
+
+    Route::get('/user/detail/{id}',[UserController::class,'show'])->name('user.show');
 
     Route::group([
         'as'=>'barang.',

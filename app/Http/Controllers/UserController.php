@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
-use App\Models\Role;
 use App\Models\User;
 use App\Services\ToastServices;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -17,12 +18,14 @@ class UserController extends Controller
     }
 
     public function create(){
-        $roles=Role::all();
+        $roles=Role::pluck('name','name')->all();
         return view('users.create',compact('roles'));
     }
 
     public function store(CreateUserRequest $request){
-        $user=User::create($request->validated());
+        $user=User::create($request->safe()->except('roles'));
+        $user->assignRole($request->roles);
+
         if(!$user){
             return redirect()->route('user.index')->with('message',ToastServices::failed('Menambahkan'));
         }
@@ -36,20 +39,25 @@ class UserController extends Controller
 
     public function edit($id){
         $user=User::findOrFail($id);
-        $roles=Role::all();
+        $roles=Role::pluck('name','name')->all();
+        
         return view('users.edit',compact('user','roles'));
     }
 
     public function update(UpdateUserRequest $request,$id){
         //Retriving value from update user request
-        $userUpdate=$request->validated();
+        $userUpdate=$request->safe()->except('roles');
         
         //Retriving value from request without update password
         if(!$request->filled('password')){
             $userUpdate=$request->safe()->except('password');
         }
 
-        $user=User::find($id)->update($userUpdate);
+        $user=User::find($id);
+        $user->update($userUpdate);
+        DB::table('model_has_roles')->where('model_id',$id)->delete();
+
+        $user->assignRole($request->roles);
 
         if(!$user){
             return redirect()->route('user.index')->with('message',ToastServices::failed('Mengupdate'));
@@ -59,7 +67,7 @@ class UserController extends Controller
     }
 
     public function delete($id){
-        $user=User::destroy($id);
+        $user=User::find($id)->delete();
         if(!$user){
             return redirect()->route('user.index')->with('message',ToastServices::failed('Menghapus'));
         }
