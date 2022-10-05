@@ -38,12 +38,20 @@
                     <div class="d-flex justify-content-between align-items-center p-2">
                         <span class="fw-bold">Report Barang Keluar Periode {{request('dari_tanggal')}} s/d {{request('sampai_tanggal')}}</span>
                         @if ($status_export)
-                            <form action="{{route('reportBarangKeluar.export')}}" method="post">
-                                @csrf
-                                <input type="hidden" name="dari_tanggal_export" value="{{request('dari_tanggal')}}">
-                                <input type="hidden" name="sampai_tanggal_export" value="{{request('sampai_tanggal')}}">
-                                <button type="submit" class="btn btn-sm btn-success">Export Excel</button>
-                            </form>
+                            <div class="export-btn d-flex gap-2">
+                                <form action="{{route('reportBarangKeluar.exportPdf')}}" method="post">
+                                    @csrf
+                                    <input type="hidden" name="dari_tanggal_export" value="{{request('dari_tanggal')}}">
+                                    <input type="hidden" name="sampai_tanggal_export" value="{{request('sampai_tanggal')}}">
+                                    <button type="submit" class="btn btn-sm btn-danger">Export PDF</button>
+                                </form>
+                                <form action="{{route('reportBarangKeluar.export')}}" method="post">
+                                    @csrf
+                                    <input type="hidden" name="dari_tanggal_export" value="{{request('dari_tanggal')}}">
+                                    <input type="hidden" name="sampai_tanggal_export" value="{{request('sampai_tanggal')}}">
+                                    <button type="submit" class="btn btn-sm btn-success">Export Excel</button>
+                                </form>
+                            </div>
                         @endif            
                     </div>
                 </div>

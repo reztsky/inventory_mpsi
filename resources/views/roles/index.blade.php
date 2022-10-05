@@ -2,46 +2,37 @@
 @section('content')
 <main>
     <div class="container-fluid px-4">
-        <h1 class="mt-2">Barangs</h1>
+        <h1 class="mt-2">Roles</h1>
         <ol class="breadcrumb mb-2">
-            <li class="breadcrumb-item active">Barangs</li>
+            <li class="breadcrumb-item active">Roles</li>
         </ol>
         <div class="bg-white shadow border border-2 rounded-2 mb-3 p-3">
             <div class="d-flex justify-content-between align-items-center">
                 <div class="title">
                     <i class="fas fa-table me-1"></i>
-                    Barangs Table
+                    Roles Table
                 </div>
                 <div class="handle">
-                    <a href="{{route('barang.export')}}" class="btn btn-sm btn-success">Export</a>
-                    <a class="btn btn-sm btn-primary" href="{{route('barang.create')}}">Create</a>
+                    <a class="btn btn-sm btn-primary" href="{{route('role.create')}}">Create</a>
                 </div>
             </div>
             <hr>
             <div class="table-responsive">
-                <table class="table" id="tableBarangs">
+                <table class="table" id="tableUser">
                     <thead>
                         <tr>
                             <th>No.</th>
-                            <th>Nama Barang</th>
-                            <th>Harga/Satuan</th>
-                            <th>Stok Tersedia</th>
+                            <th>Name</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($barangs as $barang)
+                        @forelse ($roles as $role)
                             <tr>
                                 <td>{{$loop->iteration}}</td>
-                                <td>{{$barang->nama_barang}}</td>
-                                <td>{{$barang->harga}} / {{$barang->satuan}}</td>
-                                <td>{{$barang->stok}}</td>
+                                <td>{{$role->name}}</td>
                                 <td>
-                                    <div class="gap-2">
-                                        <a href="{{route('barang.show',$barang->id)}}" class="btn-success btn btn-sm my-1 my-md-0">Detail</a>
-                                        <a href="{{route('barang.edit',$barang->id)}}"  class="btn btn-warning btn-sm my-1 my-md-0">Edit</a>
-                                        <a href="{{route('barang.delete',$barang->id)}}" class="btn-delete btn btn-danger btn-sm my-1 my-md-0">Delete</a>
-                                    </div>
+                                    <a href="{{route('role.edit',$role->id)}}" class="btn btn-sm btn-success">Edit</a>
                                 </td>
                             </tr>
                         @empty
@@ -60,7 +51,7 @@
             // Simple-DataTables
             // https://github.com/fiduswriter/Simple-DataTables/wiki
 
-            const datatablesSimple = document.getElementById('tableBarangs');
+            const datatablesSimple = document.getElementById('tableUser');
             if (datatablesSimple) {
                 new simpleDatatables.DataTable(datatablesSimple);
             }

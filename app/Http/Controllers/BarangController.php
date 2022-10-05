@@ -5,12 +5,20 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateBarangRequest;
 use App\Http\Requests\UpdateBarangRequest;
 use App\Models\Barang;
+use App\Services\Barang\ExportBarangServices;
 use App\Services\ToastServices;
 use Illuminate\Http\Request;
 
 class BarangController extends Controller
 {
-    
+    function __construct()
+    {
+        $this->middleware('permission:barang-list|barang-create|barang-edit|barang-delete', ['only' => ['index','show']]);
+        $this->middleware('permission:barang-create', ['only' => ['create','store']]);
+        $this->middleware('permission:barang-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:barang-delete', ['only' => ['destroy']]);
+    }
+
     public function index()
     {
         $barangs=Barang::all(['id','nama_barang','keterangan_barang','harga','satuan','stok']);
@@ -71,5 +79,9 @@ class BarangController extends Controller
     public function autoComplete(Request $request){
         $barangs=Barang::searchItem($request->keyword)->get();
         return response()->json($barangs);
+    }
+
+    public function export(){
+        return (new ExportBarangServices)->excel();
     }
 }

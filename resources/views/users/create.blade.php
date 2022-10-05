@@ -73,15 +73,13 @@
                             @enderror
                         </div>
                         <div class="mb-2">
-                            <label for="" class="form-label">Role</label>
-                            <select name="role_id" id="" class="form-select">
-                                @foreach ($roles as $role)
-                                    <option value="{{$role->id}}" selected>{{$role->role_name}}</option>    
+                            <label for="" class="form-label">Roles</label>
+                            <select name="roles" id="" class="form-select">
+                                <option value="">Silahkan Pilih</option>
+                                @foreach ($roles as $key=>$role)
+                                    <option value="{{$key}}">{{$role}}</option>
                                 @endforeach
                             </select>
-                            @error('role_id')
-                                <div class="form-text text-danger">{{$message}}</div>
-                            @enderror
                         </div>
                         <div class="mb-2">
                             <label for="" class="form-label">Username</label>

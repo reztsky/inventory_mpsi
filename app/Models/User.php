@@ -11,11 +11,13 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Traits\HasRoles;
 
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -23,7 +25,6 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'role_id',
         'name',
         'nik',
         'jenis_kelamin',
@@ -61,9 +62,5 @@ class User extends Authenticatable
         return Attribute::make(
             get:fn($value)=>Str::title($value),
         );
-    }
-
-    protected function role(){
-        return $this->belongsTo(Role::class,'role_id','id');
     }
 }

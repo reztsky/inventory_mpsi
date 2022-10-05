@@ -11,6 +11,14 @@ use Illuminate\Http\Request;
 
 class BarangKeluarController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:barangKeluar-list|barangKeluar-create|barangKeluar-edit|barangKeluar-delete', ['only' => ['index','show']]);
+        $this->middleware('permission:barangKeluar-create', ['only' => ['create','store']]);
+        $this->middleware('permission:barangKeluar-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:barangKeluar-delete', ['only' => ['destroy']]);
+    }
+
     public function index(){
         $barangKeluars=BarangKeluar::table();
         return view('barangKeluars.index',compact('barangKeluars'));

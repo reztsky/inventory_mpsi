@@ -63,6 +63,14 @@ class Kernel extends HttpKernel
         'signed' => \App\Http\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'isSuperAdmin'=>\App\Http\Middleware\isSuperAdmin::class,
+
+        //Custom Middleware
+        // 'isSuperAdmin'=>\App\Http\Middleware\isSuperAdmin::class,
+        // 'EnsureProfile'=>\App\Http\Middleware\EnsureProfile::class,
+
+        //Spatie Permission and  Roles
+        'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
+        'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class,
+        'role_or_permission' => \Spatie\Permission\Middlewares\RoleOrPermissionMiddleware::class,
     ];
 }

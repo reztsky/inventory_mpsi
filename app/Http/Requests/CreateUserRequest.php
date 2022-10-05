@@ -25,7 +25,7 @@ class CreateUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'role_id'=>'required|numeric',
+            'roles'=>'required',
             'name'=>'required',
             'nik'=>'required|numeric|digits:16',
             'jenis_kelamin'=>['required',Rule::in(['L','P'])],
