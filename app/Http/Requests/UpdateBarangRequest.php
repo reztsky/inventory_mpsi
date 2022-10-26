@@ -30,7 +30,7 @@ class UpdateBarangRequest extends FormRequest
             'keterangan_barang'=>'nullable',
             'harga'=>'required|numeric|min:1',
             'satuan'=>'required',
-            'stok'=>'required|numeric|min:1',
+            'stok'=>'required|numeric',
             'stok_minimal'=>'numeric',
             'stok_maksimal'=>'numeric',
         ];
