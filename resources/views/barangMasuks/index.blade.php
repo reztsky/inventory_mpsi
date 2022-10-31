@@ -37,12 +37,16 @@
                                 <td>
                                     <table class="table table-bordered">
                                         <tr>
+                                            <th>Merek</th>
+                                            <th>Jenis/Type</th>
                                             <th>Barang</th>
                                             <th>Jumlah</th>
                                         </tr>
                                         @foreach ($barangMasuk['details'] as $detail)
                                             <tr>
-                                                <td>{{$detail['barang']['nama_barang']}} {{$detail['barang']['harga']}}/{{$detail['barang']['satuan']}}</td>
+                                                <td>{{$detail['barang']['merek']}}</td>
+                                                <td>{{$detail['barang']['jenis']}}</td>
+                                                <td>{{$detail['barang']['nama_barang']}}</td>
                                                 <td>{{$detail['jumlah']}}</td>
                                             </tr>
                                         @endforeach

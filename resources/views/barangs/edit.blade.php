@@ -24,6 +24,20 @@
                 <div class="row">
                     <div class="col-md-6 col-12">
                         <div class="mb-2">
+                            <label for="" class="form-label">Merek Barang</label>
+                            <input type="text" class="form-control" placeholder="Merek Barang" name="merek" value="{{$barang->merek}}">
+                            @error('merek')
+                                <div class="form-text text-danger">{{$message}}</div>
+                            @enderror
+                        </div>
+                        <div class="mb-2">
+                            <label for="" class="form-label">Jenis/Type Barang </label>
+                            <input type="text" class="form-control" placeholder="Merek Barang" name="jenis" value="{{$barang->jenis}}">
+                            @error('jenis')
+                                <div class="form-text text-danger">{{$message}}</div>
+                            @enderror
+                        </div>
+                        <div class="mb-2">
                             <label for="" class="form-label">Nama Barang</label>
                             <input type="text" class="form-control" placeholder="Nama Barang" name="nama_barang" value="{{$barang->nama_barang}}">
                             @error('nama_barang')
@@ -34,13 +48,6 @@
                             <label for="" class="form-label">Keterangan Barang</label>
                             <input type="text" class="form-control" placeholder="Keterangan Barang" name="keterangan_barang" value="{{$barang->keterangan_barang}}">
                             @error('keterangan_barang')
-                                <div class="form-text text-danger">{{$message}}</div>
-                            @enderror
-                        </div>
-                        <div class="mb-2">
-                            <label for="" class="form-label">Harga Barang (Rp.)</label>
-                            <input type="text" class="form-control" placeholder="Harga Barang" name="harga" value="{{$barang->harga}}">
-                            @error('harga')
                                 <div class="form-text text-danger">{{$message}}</div>
                             @enderror
                         </div>
@@ -63,6 +70,13 @@
                                     @enderror
                                 </div>
                             </div>
+                        </div>
+                        <div class="mb-2">
+                            <label for="" class="form-label">Harga Barang (Rp.)</label>
+                            <input type="text" class="form-control" placeholder="Harga Barang" name="harga" value="{{$barang->harga}}">
+                            @error('harga')
+                                <div class="form-text text-danger">{{$message}}</div>
+                            @enderror
                         </div>
                         <div class="mb-2">
                             <label for="" class="form-label">Stok Minimal</label>

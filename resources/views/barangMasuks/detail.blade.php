@@ -34,24 +34,30 @@
                             <dd class="col-md-8 col-sm-6 col-12">{{$barangMasuk['tanggal_diterima']}}</dd>
                             <dt class="col-md-4 col-sm-6 col-12">Details</dt>
                             <dd class="col-md-8 col-sm-6 col-12">
-                                <table class="table table-bordered my-2">
-                                    <thead>
-                                        <tr>
-                                            <th>No.</th>
-                                            <th>Barang</th>
-                                            <th>Jumlah</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($barangMasuk['details'] as $detail)
+                                <div class="table-responsive">
+                                    <table class="table table-bordered my-2">
+                                        <thead>
                                             <tr>
-                                                <td>{{$loop->iteration}}</td>
-                                                <td>{{$detail['barang']['nama_barang']}} {{$detail['barang']['harga']}}/{{$detail['barang']['satuan']}}</td>
-                                                <td>{{$detail['jumlah']}}</td>
+                                                <th>No.</th>
+                                                <th>Merek</th>
+                                                <th>Jenis</th>
+                                                <th>Barang</th>
+                                                <th>Jumlah</th>
                                             </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($barangMasuk['details'] as $detail)
+                                                <tr>
+                                                    <td>{{$loop->iteration}}</td>
+                                                    <td>{{$detail['barang']['merek']}}</td>
+                                                    <td>{{$detail['barang']['jenis']}}</td>
+                                                    <td>{{$detail['barang']['nama_barang']}} {{$detail['barang']['harga']}}/{{$detail['barang']['satuan']}}</td>
+                                                    <td>{{$detail['jumlah']}}</td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
                             </dd>
                             <dt class="col-md-4 col-sm-6 col-12">Bukti Terima</dt>
                             <dd class="col-md-8 col-sm-6 col-12">

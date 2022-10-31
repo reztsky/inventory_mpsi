@@ -21,7 +21,7 @@ class BarangController extends Controller
 
     public function index()
     {
-        $barangs=Barang::all(['id','nama_barang','keterangan_barang','harga','satuan','stok']);
+        $barangs=Barang::all(['id','merek','jenis','nama_barang','keterangan_barang','harga','satuan','stok']);
         return view('barangs.index',compact('barangs'));
     }
 

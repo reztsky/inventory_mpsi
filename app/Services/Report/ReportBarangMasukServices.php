@@ -11,6 +11,8 @@ class ReportBarangMasukServices{
     public static function report($parameter){
         return DB::table('detail_barang_masuks')
                 ->select([
+                    'barangs.merek',
+                    'barangs.jenis',
                     'barangs.nama_barang',
                     'barangs.harga',
                     'barangs.satuan'
@@ -21,6 +23,8 @@ class ReportBarangMasukServices{
                 ->whereBetween('barang_masuks.tanggal_diterima',[$parameter['dari_tanggal'],$parameter['sampai_tanggal']])
                 ->groupBy([
                     'detail_barang_masuks.barang_id',
+                    'barangs.merek',
+                    'barangs.jenis',
                     'barangs.nama_barang',
                     'barangs.harga',
                     'barangs.satuan',

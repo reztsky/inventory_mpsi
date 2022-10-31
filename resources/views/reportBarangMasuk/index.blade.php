@@ -61,6 +61,8 @@
                             <thead>
                                 <tr>
                                     <th>No.</th>
+                                    <th>Merek</th>
+                                    <th>Jenis</th>
                                     <th>Barang</th>
                                     <th>Stok Bertambah</th>
                                 </tr>
@@ -69,6 +71,8 @@
                                 @forelse ($report as $item)
                                     <tr>
                                         <td>{{$loop->iteration}}</td>
+                                        <td>{{$item->merek}}</td>
+                                        <td>{{$item->jenis}}</td>
                                         <td>{{$item->nama_barang}} {{$item->harga}}/{{$item->satuan}}</td>
                                         <td>{{$item->stok_bertambah}}</td>
                                     </tr>

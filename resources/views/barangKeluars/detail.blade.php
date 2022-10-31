@@ -22,7 +22,7 @@
                 </div>
                 <hr>
                 <div class="row">
-                    <div class="col-md-6 col-12">
+                    <div class="col-md-8 col-12">
                         <dl class="row">
                             <dt class="col-md-4 col-sm-6 col-12">No. Transaksi</dt>
                             <dd class="col-md-8 col-sm-6 col-12">{{$barangKeluar->no_transaksi}}</dd>
@@ -39,6 +39,8 @@
                                         <thead>
                                             <tr>
                                                 <th>No.</th>
+                                                <th>Merek</th>
+                                                <th>Jenis//Type</th>
                                                 <th>Nama Barang</th>
                                                 <th>Jumlah</th>
                                                 <th>Sub. Total (Rp.)</th>
@@ -48,6 +50,8 @@
                                             @foreach ($barangKeluar->details as $detail)
                                                 <tr>
                                                     <td>{{$loop->iteration}}</td>
+                                                    <td>{{$detail->barang->merek}}</td>
+                                                    <td>{{$detail->barang->jenis}}</td>
                                                     <td>{{$detail->barang->nama_barang}}</td>
                                                     <td>{{$detail->jumlah}}</td>
                                                     <td>{{number_format($detail->sub_total,2,',','.')}}</td>

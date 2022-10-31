@@ -24,6 +24,8 @@ class UpdateBarangRequest extends FormRequest
     public function rules()
     {
         return [
+            'merek'=>'required',
+            'jenis'=>'required',
             'nama_barang'=>'required',
             'keterangan_barang'=>'nullable',
             'harga'=>'required|numeric|min:1',

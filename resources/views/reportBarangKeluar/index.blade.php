@@ -61,6 +61,8 @@
                             <thead>
                                 <tr>
                                     <th>No.</th>
+                                    <th>Merek</th>
+                                    <th>Jenis/Type</th>
                                     <th>Barang</th>
                                     <th>Stok Berkurang</th>
                                     <th>Total Penjualan (Rp.)</th>
@@ -73,6 +75,8 @@
                                 @forelse ($report as $item)
                                     <tr>
                                         <td>{{$loop->iteration}}</td>
+                                        <td>{{$item->merek}}</td>
+                                        <td>{{$item->jenis}}</td>
                                         <td>{{$item->nama_barang}} {{$item->harga}}/{{$item->satuan}}</td>
                                         <td>{{$item->stok_berkurang}}</td>
                                         <td>{{number_format($item->total_penjualan,0,',','.')}}</td>
@@ -86,7 +90,7 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th colspan="3">Total (Rp.)</th>
+                                    <th colspan="5">Total (Rp.)</th>
                                     <th>{{number_format($totalPenjualan,0,',','.')}}</th>
                                 </tr>
                             </tfoot>
