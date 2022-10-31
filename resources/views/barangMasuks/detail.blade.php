@@ -28,6 +28,8 @@
                             <dd class="col-md-8 col-sm-6 col-12">{{$barangMasuk['user']['name']}}</dd>
                             <dt class="col-md-4 col-sm-6 col-12">Barang Dari</dt>
                             <dd class="col-md-8 col-sm-6 col-12">{{$barangMasuk['barang_dari']}}</dd>
+                            <dt class="col-md-4 col-sm-6 col-12">No. Telp Pengirim</dt>
+                            <dd class="col-md-8 col-sm-6 col-12">{{$barangMasuk['no_telfon']}}</dd>
                             <dt class="col-md-4 col-sm-6 col-12">Nama Penerima</dt>
                             <dd class="col-md-8 col-sm-6 col-12">{{$barangMasuk['nama_penerima']}}</dd>
                             <dt class="col-md-4 col-sm-6 col-12">Tanggal Diterima</dt>

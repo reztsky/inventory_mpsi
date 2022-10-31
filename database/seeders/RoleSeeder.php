@@ -16,8 +16,8 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-        $permissions=Permission::all();
+        $permissions=Permission::all()->pluck('id')->toArray();
         $role=Role::create(['name'=>'superadmin']);
-        // $role->syncPermission
+        $role->syncPermissions($permissions);
     }
 }

@@ -28,6 +28,7 @@ class CreateBarangMasukRequest extends FormRequest
             'barang_id.*'=>'required|numeric',
             'jumlah.*'=>'required|numeric',
             'barang_dari'=>'required',
+            'no_telfon'=>'required|numeric',
             'nama_penerima'=>'required',
             'tanggal_diterima'=>'required|date|before:tomorrow',
             'bukti_terima'=>'required|max:2048|image',

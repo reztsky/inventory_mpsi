@@ -30,6 +30,13 @@
                             @enderror
                         </div>
                         <div class="mb-2">
+                            <label for="" class="form-label">No.Telp Pengirim</label>
+                            <input type="text" class="form-control" name="no_telfon" placeholder="No.Telp Pengirim">
+                            @error('no_telfon')
+                                <div class="form-text text-danger">{{$message}}</div>
+                            @enderror
+                        </div>
+                        <div class="mb-2">
                             <label for="" class="form-label">Nama Penerima</label>
                             <input type="text" class="form-control" name="nama_penerima" placeholder="Nama Penerima">
                             @error('nama_penerima')
