@@ -77,7 +77,7 @@
             
             for (const btn_delete of btn_deletes){
                 btn_delete.addEventListener('click', event => {
-                   if(!confirm('Yakin ingin menghapus data ?')) event.preventDefault()
+                   if(!confirm('Yakin ingin menghapus data ?, menghapus data barang akan menghapus semua transaksi terkait barang tersebut')) event.preventDefault()
                 })
             }
         }

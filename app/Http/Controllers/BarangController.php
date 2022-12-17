@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateBarangRequest;
 use App\Http\Requests\UpdateBarangRequest;
 use App\Models\Barang;
+use App\Models\BarangKeluar;
+use App\Models\BarangMasuk;
+use App\Services\Barang\DeleteBarangServices;
 use App\Services\Barang\ExportBarangServices;
 use App\Services\ToastServices;
 use Illuminate\Http\Request;
@@ -67,9 +70,12 @@ class BarangController extends Controller
     }
 
     
-    public function destroy($id)
+    public function delete($id)
     {
-        $barang=Barang::destroy($id);
+
+        $deleteBarangServices=new DeleteBarangServices($id);
+        $barang=$deleteBarangServices->delete();
+        
         if(!$barang){
             return redirect()->route('barang.index')->with('message',ToastServices::failed('Menghapus'));
         }

@@ -42,6 +42,14 @@ class Barang extends Model
         );
     }
 
+    public function detailBarangMasuks(){
+        return $this->hasMany(DetailBarangMasuk::class,'barang_id','id');
+    }
+
+    public function detailBarangKeluars(){
+        return $this->hasMany(DetailBarangKeluar::class,'barang_id','id');
+    }
+
     // protected function harga():Attribute{
     //     return Attribute::make(
     //         get:fn($value)=>"Rp. ".number_format($value,2,',','.'),
