@@ -39,9 +39,9 @@
                                         <thead>
                                             <tr>
                                                 <th>No.</th>
-                                                <th>Merek</th>
-                                                <th>Jenis//Type</th>
                                                 <th>Nama Barang</th>
+                                                <th>Jenis//Type</th>
+                                                <th>Merek</th>
                                                 <th>Jumlah</th>
                                                 <th>Sub. Total (Rp.)</th>
                                             </tr>
@@ -50,9 +50,9 @@
                                             @foreach ($barangKeluar->details as $detail)
                                                 <tr>
                                                     <td>{{$loop->iteration}}</td>
-                                                    <td>{{$detail->barang->merek}}</td>
-                                                    <td>{{$detail->barang->jenis}}</td>
                                                     <td>{{$detail->barang->nama_barang}}</td>
+                                                    <td>{{$detail->barang->jenis}}</td>
+                                                    <td>{{$detail->barang->merek}}</td>
                                                     <td>{{$detail->jumlah}}</td>
                                                     <td>{{number_format($detail->sub_total,2,',','.')}}</td>
                                                 </tr>

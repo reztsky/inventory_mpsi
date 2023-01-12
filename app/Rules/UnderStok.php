@@ -27,7 +27,6 @@ class UnderStok implements Rule
      */
     public function passes($attribute, $value)
     {
-        
         return StokBarangServices::checkStok($this->barang_id,$value);
 
     }

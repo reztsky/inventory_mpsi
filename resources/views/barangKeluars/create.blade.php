@@ -1,4 +1,7 @@
 @extends('layout.layout')
+@push('style')
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+@endpush
 @section('content')
 <main>
     <div class="container-fluid px-4">
@@ -58,6 +61,8 @@
                                             <div class="mb-2">
                                                 <label for="" class="form-label">Barang</label>
                                                 <input type="text" class="form-control search" placeholder="Barang" @keyup="searchBarang(index)" @focusout="setBarangId(index)">
+                                                <input type="hidden" :id="'barang_id-'+index">
+                                                <input type="hidden" :id="'harga_barang-'+index">
                                                 <input type="hidden" class="barang-id" name="barang_id[]" v-model="barang.barang_id">
                                             </div>
                                         </div>
@@ -65,6 +70,7 @@
                                             <div class="mb-2">
                                                 <label for="" class="form-label">Jumlah</label>
                                                 <input type="number" class="form-control" placeholder="Jumlah" name="jumlah[]" @keyup="calculateSubTotal(index)" v-model="barang.jumlah">
+                                                <div class="form-text text-danger" :id="'warning-text-'+index"></div>
                                                 @error('jumlah.*')
                                                     <div class="form-text text-danger">{{$message}}</div>
                                                 @enderror
@@ -99,7 +105,7 @@
 @push('script')
 <script src="https://unpkg.com/vue@3"></script>
 <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js">
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 </script>
 <script>
     const { createApp,onMounted } = Vue
@@ -134,23 +140,60 @@
         },
         searchBarang(index){
             var route="{{route('barang.autoComplete')}}"
-            var searchInput=$(`.search:eq(${index})`)
-            searchInput.typeahead({
-                source:function(keyword,process){
-                    return $.get(route,{keyword:keyword}, function(data){
-                        return process(data)
-                    })
-                },
-            })
+                var searchInput=$(`.search:eq(${index})`)
+
+                searchInput.autocomplete({
+                    source:function(request,response){
+                        $.ajax({
+                            url:route,
+                            data:{
+                                name:request.term
+                            },
+                            dataType:"json",
+                            success:function(data){
+                                var resp=$.map(data,function(obj){
+                                    return {
+                                        value:obj.name,
+                                        label:obj.name,
+                                        id:obj.id,
+                                        harga:obj.harga
+                                    }
+                                })
+                                response(resp);
+                            }
+                        })
+                    },
+                    select:function(event,ui){
+                        $(`#barang_id-${index}`).val(ui.item.id)
+                        $(`#harga_barang-${index}`).val(ui.item.harga)
+                    }
+                })
         },
         setBarangId(index){
-            var selectedSearch=$(`.search:eq(${index})`).typeahead('getActive')
-            this.barangs[index].barang_id=selectedSearch.id
+            var barangId=$(`#barang_id-${index}`).val()
+            this.barangs[index].barang_id=barangId
         },
         calculateSubTotal(index){
-            var selectedSearch=$(`.search:eq(${index})`).typeahead('getActive')
-            this.barangs[index].sub_total=this.barangs[index].jumlah*selectedSearch.harga
+            var harga_barang=$(`#harga_barang-${index}`).val()
+            this.barangs[index].sub_total=this.barangs[index].jumlah*parseInt(harga_barang)
             this.calculateTotal()
+            this.checkStock(index)
+        },
+        checkStock(index){
+            var barangId=$(`#barang_id-${index}`).val()
+            var route="{{route('barangKeluar.checkStock')}}"
+            var jumlah=this.barangs[index].jumlah
+            if(jumlah=='') return
+            $.ajax({
+                url:route,
+                data:{
+                    barang_id:barangId,
+                    jumlah:jumlah
+                },
+                success:function(response){
+                    $(`#warning-text-${index}`).html(response.message)
+                }
+            })
         },
         calculateTotal(){
             this.total=0

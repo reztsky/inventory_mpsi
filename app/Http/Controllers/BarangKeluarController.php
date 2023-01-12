@@ -6,6 +6,7 @@ use App\Http\Requests\CreateBarangKeluarRequest;
 use App\Models\BarangKeluar;
 use App\Services\BarangKeluar\CreateBarangKeluarServices;
 use App\Services\BarangKeluar\DeleteBarangKeluarServices;
+use App\Services\StokBarangServices;
 use App\Services\ToastServices;
 use Illuminate\Http\Request;
 
@@ -65,5 +66,13 @@ class BarangKeluarController extends Controller
             return redirect()->route('barangKeluar.index')->with('message',ToastServices::failed('Menghapus'));
         }
         return redirect()->route('barangKeluar.index')->with('message',ToastServices::success('Menghapus'));
+    }
+
+    public function checkStock(Request $request){
+        if(StokBarangServices::checkStok($request->barang_id,$request->jumlah)){
+            return response()->json(['message'=>''],200);
+        }
+        
+        return response()->json(['message'=>'Stok Barang Kurang'],200);
     }
 }

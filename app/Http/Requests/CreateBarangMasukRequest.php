@@ -31,7 +31,7 @@ class CreateBarangMasukRequest extends FormRequest
             'no_telfon'=>'required|numeric',
             'nama_penerima'=>'required',
             'tanggal_diterima'=>'required|date|before:tomorrow',
-            'bukti_terima'=>'required|max:2048|image',
+            'bukti_terima'=>'nullable|max:2048|image',
             'inserted_by'=>'required|numeric',
         ];
     }

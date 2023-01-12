@@ -1,4 +1,8 @@
 @extends('layout.layout')
+@push('style')
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+@endpush
+
 @section('content')
 <main>
     <div class="container-fluid px-4">
@@ -31,7 +35,7 @@
                         </div>
                         <div class="mb-2">
                             <label for="" class="form-label">No.Telp Pengirim</label>
-                            <input type="text" class="form-control" name="no_telfon" placeholder="No.Telp Pengirim">
+                            <input type="text" class="form-control" name="no_telfon" placeholder="No.Telp Pengirim" value="0">
                             @error('no_telfon')
                                 <div class="form-text text-danger">{{$message}}</div>
                             @enderror
@@ -77,8 +81,9 @@
                                         <div class="col-md-6 col-12">
                                             <div class="mb-2">
                                                 <label for="" class="form-label">Barang</label>
-                                                <input type="text" id="search" name="search" placeholder="Barang" class="form-control search" @keyup="searchBarang(index)" @focusout="setBarangId(index)">
-                                                <input type="hidden" id="barang_id" name="barang_id[]" v-model="detailBarang.barang_id">
+                                                <input type="text" class="form-control search" id="search" name="search" placeholder="Barang" @keyup="searchBarang(index)" @focusout="setBarangId(index)">
+                                                <input type="hidden" :id="'barang_id-'+index">
+                                                <input type="hidden" id="barang_id" class="barang_name" name="barang_id[]" v-model="detailBarang.barang_id">
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-12">
@@ -109,7 +114,7 @@
 @push('script')
 <script src="https://unpkg.com/vue@3"></script>
 <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <script>
     const { createApp } = Vue
 
@@ -138,21 +143,63 @@
             searchBarang(index){
                 var route="{{route('barang.autoComplete')}}"
                 var searchInput=$(`.search:eq(${index})`)
-                searchInput.typeahead({
-                    source:function(keyword,process){
-                        return $.get(route,{keyword:keyword}, function(data){
-                            return process(data)
+
+                searchInput.autocomplete({
+                    source:function(request,response){
+                        $.ajax({
+                            url:route,
+                            data:{
+                                name:request.term
+                            },
+                            dataType:"json",
+                            success:function(data){
+                                var resp=$.map(data,function(obj){
+                                    return {
+                                        value:obj.name,
+                                        label:obj.name,
+                                        id:obj.id
+                                    }
+                                })
+                                response(resp);
+                            }
                         })
                     },
+                    select:function(event,ui){
+                        $(`#barang_id-${index}`).val(ui.item.id)
+                        
+                    }
                 })
             },
             setBarangId(index){
-                var selectedSearch=$(`.search:eq(${index})`).typeahead('getActive')
-                this.detailBarangs[index].barang_id=selectedSearch.id
+                var barangId=$(`#barang_id-${index}`).val()
+                this.detailBarangs[index].barang_id=barangId
             },
         },
     }).mount('#app')
 </script>
+$(document).ready(function() {
+    $( "#search" ).autocomplete({
+  
+        source: function(request, response) {
+            $.ajax({
+            url: "{{route('barang.autoComplete')}}",
+            data: {
+                    term : request.term
+             },
+            dataType: "json",
+            success: function(data){
+               var resp = $.map(data,function(obj){
+                    return obj.name;
+               }); 
+  
+               response(resp);
+            }
+        });
+    },
+    minLength: 2
+ });
+});
+
     {{-- // var route="{{route('barang.autoComplete')}}"
     
     
@@ -166,5 +213,7 @@
     //         $('#barang_id').val(selected.id)
     //     },
     //  }) --}}
+
+   
 
 @endpush

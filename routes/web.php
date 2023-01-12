@@ -110,6 +110,7 @@ Route::group([
         Route::get('/detail/{id}','show')->name('show');
         Route::post('/store','store')->name('store');
         Route::get('/delete/{id}','delete')->name('delete');
+        Route::get('/check-stock','checkStock')->name('checkStock');
     });
 
     Route::group([

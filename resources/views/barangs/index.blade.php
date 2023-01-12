@@ -33,41 +33,40 @@
                     </thead>
                     <tbody>
                         @forelse ($barangs as $barang)
-                            <tr>
-                                <td>{{$loop->iteration}}</td>
-                                <td>{{$barang->merek}}</td>
-                                <td>{{$barang->jenis}}</td>
-                                <td>{{$barang->nama_barang}}</td>
-                                <td>{{$barang->harga}} / {{$barang->satuan}}</td>
-                                <td>{{$barang->stok}}</td>
-                                <td>
-                                    <div class="gap-2">
-                                        <a href="{{route('barang.show',$barang->id)}}" class="btn-success btn btn-sm my-1 my-md-0">Detail</a>
-                                        <a href="{{route('barang.edit',$barang->id)}}"  class="btn btn-warning btn-sm my-1 my-md-0">Edit</a>
-                                        <a href="{{route('barang.delete',$barang->id)}}" class="btn-delete btn btn-danger btn-sm my-1 my-md-0">Delete</a>
-                                    </div>
-                                </td>
-                            </tr>
+                        <tr>
+                            <td>{{$loop->iteration}}</td>
+                            <td>{{$barang->merek}}</td>
+                            <td>{{$barang->jenis}}</td>
+                            <td>{{$barang->nama_barang}}</td>
+                            <td>{{$barang->harga}} / {{$barang->satuan}}</td>
+                            <td>{{$barang->stok}}</td>
+                            <td>
+                                <div class="gap-2">
+                                    <a href="{{route('barang.show',$barang->id)}}"
+                                        class="btn-success btn btn-sm my-1 my-md-0">Detail</a>
+                                    <a href="{{route('barang.edit',$barang->id)}}"
+                                        class="btn btn-warning btn-sm my-1 my-md-0">Edit</a>
+                                    <a href="{{route('barang.delete',$barang->id)}}"
+                                        class="btn-delete btn btn-danger btn-sm my-1 my-md-0">Delete</a>
+                                </div>
+                            </td>
+                        </tr>
                         @empty
-                            
+                        <tr>
+                            <td colspan="6">No Found Record</td>
+                        </tr>
                         @endforelse
                     </tbody>
                 </table>
             </div>
-        </div>        
+        </div>
     </div>
 </main>
 @endsection
 @push('script')
-    <script>
-        window.addEventListener('DOMContentLoaded', event => {
-            // Simple-DataTables
-            // https://github.com/fiduswriter/Simple-DataTables/wiki
-
-            const datatablesSimple = document.getElementById('tableBarangs');
-            if (datatablesSimple) {
-                new simpleDatatables.DataTable(datatablesSimple);
-            }
+<script>
+    window.addEventListener('DOMContentLoaded', event => {
+            const datTable=new simpleDatatables.DataTable('#tableBarangs');
 
             deleteButton();
         });
@@ -81,5 +80,5 @@
                 })
             }
         }
-    </script>
+</script>
 @endpush

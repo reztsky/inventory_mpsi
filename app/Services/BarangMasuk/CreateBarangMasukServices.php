@@ -11,10 +11,13 @@ class CreateBarangMasukServices{
     public function __construct(public $request){}
 
     public function store(){
-        // Prepare For Storing
         $barangMasukForm=$this->request->safe()->except(['bukti_terima','barang_id','jumlah']);
-        $barangMasukForm['bukti_terima']=(new BuktiTerimaServices)->upload($this->request->bukti_terima);
 
+        // Prepare For Storing
+        if($this->request->filled('bukti_terima')){
+            $barangMasukForm['bukti_terima']=(new BuktiTerimaServices)->upload($this->request->bukti_terima);
+        }else $barangMasukForm['bukti_terima']='xxx.jpg';
+        
         // Store Barang Masuk
         $barangMasuk=BarangMasuk::create($barangMasukForm);
 

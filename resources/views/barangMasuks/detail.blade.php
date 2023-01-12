@@ -41,9 +41,9 @@
                                         <thead>
                                             <tr>
                                                 <th>No.</th>
-                                                <th>Merek</th>
-                                                <th>Jenis</th>
                                                 <th>Barang</th>
+                                                <th>Jenis</th>
+                                                <th>Merek</th>
                                                 <th>Jumlah</th>
                                             </tr>
                                         </thead>
@@ -51,9 +51,9 @@
                                             @foreach ($barangMasuk['details'] as $detail)
                                                 <tr>
                                                     <td>{{$loop->iteration}}</td>
-                                                    <td>{{$detail['barang']['merek']}}</td>
-                                                    <td>{{$detail['barang']['jenis']}}</td>
                                                     <td>{{$detail['barang']['nama_barang']}} {{$detail['barang']['harga']}}/{{$detail['barang']['satuan']}}</td>
+                                                    <td>{{$detail['barang']['jenis']}}</td>
+                                                    <td>{{$detail['barang']['merek']}}</td>
                                                     <td>{{$detail['jumlah']}}</td>
                                                 </tr>
                                             @endforeach

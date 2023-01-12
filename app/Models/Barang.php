@@ -12,7 +12,7 @@ class Barang extends Model
 {
     use HasFactory;
 
-    protected $fillable=[
+    protected $fillable = [
         'merek',
         'jenis',
         'nama_barang',
@@ -24,30 +24,34 @@ class Barang extends Model
         'stok_maksimal'
     ];
 
-    protected $casts=[
-        'created_at'=>'datetime:d/m/Y H:i:s',
-        'updated_at'=>'datetime:d/m/Y H:i:s',
+    protected $casts = [
+        'created_at' => 'datetime:d/m/Y H:i:s',
+        'updated_at' => 'datetime:d/m/Y H:i:s',
     ];
 
 
-    protected function merek():Attribute{
+    protected function merek(): Attribute
+    {
         return Attribute::make(
-            set:fn($value)=> Str::upper($value),
+            set: fn ($value) => Str::upper($value),
         );
     }
 
-    protected function jenis():Attribute{
+    protected function jenis(): Attribute
+    {
         return Attribute::make(
-            set:fn($value)=> Str::upper($value),
+            set: fn ($value) => Str::upper($value),
         );
     }
 
-    public function detailBarangMasuks(){
-        return $this->hasMany(DetailBarangMasuk::class,'barang_id','id');
+    public function detailBarangMasuks()
+    {
+        return $this->hasMany(DetailBarangMasuk::class, 'barang_id', 'id');
     }
 
-    public function detailBarangKeluars(){
-        return $this->hasMany(DetailBarangKeluar::class,'barang_id','id');
+    public function detailBarangKeluars()
+    {
+        return $this->hasMany(DetailBarangKeluar::class, 'barang_id', 'id');
     }
 
     // protected function harga():Attribute{
@@ -56,11 +60,11 @@ class Barang extends Model
     //     );
     // }
 
-    public function scopeSearchItem($query,$keyword){
+    public function scopeSearchItem($query, $keyword)
+    {
         return $query
-                ->select('id','harga')
-                ->selectRaw('CONCAT(merek," - ",nama_barang," - ",jenis," ",harga,"/",satuan) as name')
-                ->where('nama_barang','LIKE',"%{$keyword}%");
+        ->select('id', 'harga')
+        ->selectRaw('CONCAT(nama_barang," - ",jenis," - ",merek," ",harga,"/",satuan) as name')
+            ->where('nama_barang', 'LIKE', "%{$keyword}%");
     }
-    
 }
