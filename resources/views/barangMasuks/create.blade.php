@@ -177,43 +177,4 @@
         },
     }).mount('#app')
 </script>
-$(document).ready(function() {
-    $( "#search" ).autocomplete({
-  
-        source: function(request, response) {
-            $.ajax({
-            url: "{{route('barang.autoComplete')}}",
-            data: {
-                    term : request.term
-             },
-            dataType: "json",
-            success: function(data){
-               var resp = $.map(data,function(obj){
-                    return obj.name;
-               }); 
-  
-               response(resp);
-            }
-        });
-    },
-    minLength: 2
- });
-});
-
-    {{-- // var route="{{route('barang.autoComplete')}}"
-    
-    
-    // $('#search').typeahead({
-    //     source:function(keyword,process){
-    //         return $.get(route,{keyword:keyword}, function(data){
-    //             return process(data)
-    //         })
-    //     },
-    //     afterSelect:function(selected){
-    //         $('#barang_id').val(selected.id)
-    //     },
-    //  }) --}}
-
-   
-
 @endpush
