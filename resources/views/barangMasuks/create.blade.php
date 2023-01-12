@@ -1,6 +1,21 @@
 @extends('layout.layout')
 @push('style')
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<style>
+    .ui-autocomplete {
+        max-height: 100px;
+        overflow-y: auto;
+        /* prevent horizontal scrollbar */
+        overflow-x: hidden;
+    }
+
+    /* IE 6 doesn't support max-height
+   * we use height instead, but this forces the menu to always be this tall
+   */
+    * html .ui-autocomplete {
+        height: 100px;
+    }
+</style>
 @endpush
 
 @section('content')
@@ -30,28 +45,29 @@
                             <label for="" class="form-label">Barang Dari</label>
                             <input type="text" class="form-control" name="barang_dari" placeholder="Barang Dari">
                             @error('barang_dari')
-                                <div class="form-text text-danger">{{$message}}</div>
+                            <div class="form-text text-danger">{{$message}}</div>
                             @enderror
                         </div>
                         <div class="mb-2">
                             <label for="" class="form-label">No.Telp Pengirim</label>
-                            <input type="text" class="form-control" name="no_telfon" placeholder="No.Telp Pengirim" value="0">
+                            <input type="text" class="form-control" name="no_telfon" placeholder="No.Telp Pengirim"
+                                value="0">
                             @error('no_telfon')
-                                <div class="form-text text-danger">{{$message}}</div>
+                            <div class="form-text text-danger">{{$message}}</div>
                             @enderror
                         </div>
                         <div class="mb-2">
                             <label for="" class="form-label">Nama Penerima</label>
                             <input type="text" class="form-control" name="nama_penerima" placeholder="Nama Penerima">
                             @error('nama_penerima')
-                                <div class="form-text text-danger">{{$message}}</div>
+                            <div class="form-text text-danger">{{$message}}</div>
                             @enderror
                         </div>
                         <div class="mb-2">
                             <label for="" class="form-label">Tanggal Diterima</label>
                             <input type="date" class="form-control" name="tanggal_diterima">
                             @error('tanggal_diterima')
-                                <div class="form-text text-danger">{{$message}}</div>
+                            <div class="form-text text-danger">{{$message}}</div>
                             @enderror
                         </div>
                         <div class="mb-2">
@@ -64,7 +80,7 @@
                                 </ul>
                             </div>
                             @error('bukti_terima')
-                                <div class="form-text text-danger">{{$message}}</div>
+                            <div class="form-text text-danger">{{$message}}</div>
                             @enderror
                         </div>
                     </div>
@@ -72,7 +88,8 @@
                         <div class="card">
                             <div class="card-header">
                                 <div class="d-flex justify-content-end">
-                                    <button class="btn btn-success btn-sm" @click="addMore" type="button">Tambah Barang</button>
+                                    <button class="btn btn-success btn-sm" @click="addMore" type="button">Tambah
+                                        Barang</button>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -81,18 +98,24 @@
                                         <div class="col-md-6 col-12">
                                             <div class="mb-2">
                                                 <label for="" class="form-label">Barang</label>
-                                                <input type="text" class="form-control search" id="search" name="search" placeholder="Barang" @keyup="searchBarang(index)" @focusout="setBarangId(index)">
+                                                <input type="text" class="form-control search" id="search" name="search"
+                                                    placeholder="Barang" @keyup="searchBarang(index)"
+                                                    @focusout="setBarangId(index)">
                                                 <input type="hidden" :id="'barang_id-'+index">
-                                                <input type="hidden" id="barang_id" class="barang_name" name="barang_id[]" v-model="detailBarang.barang_id">
+                                                <input type="hidden" id="barang_id" class="barang_name"
+                                                    name="barang_id[]" v-model="detailBarang.barang_id">
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-12">
                                             <label for="" class="form-label">Jumlah</label>
                                             <div class="input-group mb-2">
-                                                <input type="number" class="form-control" name="jumlah[]" placeholder="Jumlah" v-model="detailBarang.jumlah">
-                                                <button  v-show="index !=0 " class="btn btn-sm btn-danger input-group-text" @click="removeBarang(index)">X</button>
+                                                <input type="number" class="form-control" name="jumlah[]"
+                                                    placeholder="Jumlah" v-model="detailBarang.jumlah">
+                                                <button v-show="index !=0 "
+                                                    class="btn btn-sm btn-danger input-group-text"
+                                                    @click="removeBarang(index)">X</button>
                                                 @error('jumlah')
-                                                    <div class="form-text text-danger">{{$message}}</div>
+                                                <div class="form-text text-danger">{{$message}}</div>
                                                 @enderror
                                             </div>
                                         </div>
@@ -107,13 +130,14 @@
                     <button class="btn btn-sm btn-primary" type="submit">Create</button>
                 </div>
             </form>
-        </div>        
+        </div>
     </div>
 </main>
 @endsection
 @push('script')
 <script src="https://unpkg.com/vue@3"></script>
-<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"
+    integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <script>
     const { createApp } = Vue

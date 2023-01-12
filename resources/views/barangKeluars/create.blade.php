@@ -1,6 +1,21 @@
 @extends('layout.layout')
 @push('style')
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<style>
+    .ui-autocomplete {
+        max-height: 100px;
+        overflow-y: auto;
+        /* prevent horizontal scrollbar */
+        overflow-x: hidden;
+    }
+
+    /* IE 6 doesn't support max-height
+   * we use height instead, but this forces the menu to always be this tall
+   */
+    * html .ui-autocomplete {
+        height: 100px;
+    }
+</style>
 @endpush
 @section('content')
 <main>
@@ -27,69 +42,80 @@
                     <div class="col-md-4 col-12">
                         <div class="mb-2">
                             <label for="" class="form-label">Tujuan Kirim</label>
-                            <input type="text" class="form-control" name="tujuan_kirim" value="{{old('tujuan_kirim')}}" placeholder="Tujuan Kirim">
+                            <input type="text" class="form-control" name="tujuan_kirim" value="{{old('tujuan_kirim')}}"
+                                placeholder="Tujuan Kirim">
                             @error('tujuan_kirim')
-                                <div class="form-text text-danger">{{$message}}</div>
+                            <div class="form-text text-danger">{{$message}}</div>
                             @enderror
                         </div>
                         <div class="mb-2">
                             <label for="" class="form-label">Tanggal Kirim</label>
-                            <input type="date" class="form-control" name="tanggal_keluar" value="{{old('tanggal_keluar')}}">
+                            <input type="date" class="form-control" name="tanggal_keluar"
+                                value="{{old('tanggal_keluar')}}">
                             @error('tanggal_keluar')
-                                <div class="form-text text-danger">{{$message}}</div>
+                            <div class="form-text text-danger">{{$message}}</div>
                             @enderror
                         </div>
                         <div class="mb-2">
                             <label for="" class="form-label">Total Harga</label>
-                            <input type="text" class="form-control" placeholder="Total Harga" name="total_harga" readonly v-model="total">
+                            <input type="text" class="form-control" placeholder="Total Harga" name="total_harga"
+                                readonly v-model="total">
                             @error('total_harga')
-                                <div class="form-text text-danger">{{$message}}</div>
+                            <div class="form-text text-danger">{{$message}}</div>
                             @enderror
                         </div>
                     </div>
-                    <div class="col-md-8 col-12" id="cardBarang"> 
+                    <div class="col-md-8 col-12" id="cardBarang">
                         <div class="card">
                             <div class="card-header d-flex justify-content-end">
                                 <div class="d-flex justify-content-end">
-                                    <button @click="addMore()" type="button" class="btn btn-sm btn-success">Tambah Barang</button>
+                                    <button @click="addMore()" type="button" class="btn btn-sm btn-success">Tambah
+                                        Barang</button>
                                 </div>
                             </div>
                             <div class="card-body">
-                                <div v-for="(barang,index) in barangs">      
+                                <div v-for="(barang,index) in barangs">
                                     <div class="row">
                                         <div class="col-md-5 col-sm-5 col-12">
                                             <div class="mb-2">
                                                 <label for="" class="form-label">Barang</label>
-                                                <input type="text" class="form-control search" placeholder="Barang" @keyup="searchBarang(index)" @focusout="setBarangId(index)">
+                                                <input type="text" class="form-control search" placeholder="Barang"
+                                                    @keyup="searchBarang(index)" @focusout="setBarangId(index)">
                                                 <input type="hidden" :id="'barang_id-'+index">
                                                 <input type="hidden" :id="'harga_barang-'+index">
-                                                <input type="hidden" class="barang-id" name="barang_id[]" v-model="barang.barang_id">
+                                                <input type="hidden" class="barang-id" name="barang_id[]"
+                                                    v-model="barang.barang_id">
                                             </div>
                                         </div>
                                         <div class="col-md-4 col-sm-5 col-12">
                                             <div class="mb-2">
                                                 <label for="" class="form-label">Jumlah</label>
-                                                <input type="number" class="form-control" placeholder="Jumlah" name="jumlah[]" @keyup="calculateSubTotal(index)" v-model="barang.jumlah">
+                                                <input type="number" class="form-control" placeholder="Jumlah"
+                                                    name="jumlah[]" @keyup="calculateSubTotal(index)"
+                                                    v-model="barang.jumlah">
                                                 <div class="form-text text-danger" :id="'warning-text-'+index"></div>
                                                 @error('jumlah.*')
-                                                    <div class="form-text text-danger">{{$message}}</div>
+                                                <div class="form-text text-danger">{{$message}}</div>
                                                 @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-3 col-sm-5 col-12">
                                             <label for="" class="form-label">Sub Total</label>
                                             <div class="mb-2 input-group">
-                                                <input type="text" class="form-control" placeholder="Sub Total" readonly name="sub_total[]" v-model="barang.sub_total">
-                                                <button  v-show="index !=0 " class="btn btn-sm btn-danger input-group-text" @click="removeBarang(index)">X</button>
+                                                <input type="text" class="form-control" placeholder="Sub Total" readonly
+                                                    name="sub_total[]" v-model="barang.sub_total">
+                                                <button v-show="index !=0 "
+                                                    class="btn btn-sm btn-danger input-group-text"
+                                                    @click="removeBarang(index)">X</button>
                                             </div>
                                             @error('sub_total.*')
-                                                <div class="form-text text-danger">{{$message}}</div>
+                                            <div class="form-text text-danger">{{$message}}</div>
                                             @enderror
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>                     
+                        </div>
                         <hr>
                     </div>
                 </div>
@@ -98,13 +124,14 @@
                     <button class="btn btn-sm btn-primary" type="submit">Create</button>
                 </div>
             </form>
-        </div>        
+        </div>
     </div>
 </main>
 @endsection
 @push('script')
 <script src="https://unpkg.com/vue@3"></script>
-<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"
+    integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 </script>
 <script>
