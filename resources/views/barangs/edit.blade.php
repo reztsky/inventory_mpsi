@@ -24,9 +24,9 @@
                 <div class="row">
                     <div class="col-md-6 col-12">
                         <div class="mb-2">
-                            <label for="" class="form-label">Merek Barang</label>
-                            <input type="text" class="form-control" placeholder="Merek Barang" name="merek" value="{{$barang->merek}}">
-                            @error('merek')
+                            <label for="" class="form-label">Nama Barang</label>
+                            <input type="text" class="form-control" placeholder="Nama Barang" name="nama_barang" value="{{$barang->nama_barang}}">
+                            @error('nama_barang')
                                 <div class="form-text text-danger">{{$message}}</div>
                             @enderror
                         </div>
@@ -38,9 +38,9 @@
                             @enderror
                         </div>
                         <div class="mb-2">
-                            <label for="" class="form-label">Nama Barang</label>
-                            <input type="text" class="form-control" placeholder="Nama Barang" name="nama_barang" value="{{$barang->nama_barang}}">
-                            @error('nama_barang')
+                            <label for="" class="form-label">Merek Barang</label>
+                            <input type="text" class="form-control" placeholder="Merek Barang" name="merek" value="{{$barang->merek}}">
+                            @error('merek')
                                 <div class="form-text text-danger">{{$message}}</div>
                             @enderror
                         </div>

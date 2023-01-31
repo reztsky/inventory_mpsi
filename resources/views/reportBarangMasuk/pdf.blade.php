@@ -25,9 +25,9 @@
         <thead>
             <tr>
                 <th>No.</th>
-                <th>Merek</th>
-                <th>Jenis/Type</th>
                 <th>Barang</th>
+                <th>Jenis/Type</th>
+                <th>Merek</th>
                 <th>Stok Bertambah</th>
             </tr>
         </thead>
@@ -38,9 +38,9 @@
                 @endphp 
                 <tr>
                     <td>{{$loop->iteration}}</td>
-                    <td>{{$item->merek}}</td>
-                    <td>{{$item->jenis}}</td>
                     <td>{{$item->nama_barang}} {{$item->harga}}/{{$item->satuan}}</td>
+                    <td>{{$item->jenis}}</td>
+                    <td>{{$item->merek}}</td>
                     <td>{{$item->stok_bertambah}}</td>
                 </tr>
                 @php

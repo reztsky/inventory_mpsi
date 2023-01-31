@@ -83,7 +83,7 @@ class BarangController extends Controller
     }
 
     public function autoComplete(Request $request){
-        $barangs=Barang::searchItem($request->keyword)->get();
+        $barangs=Barang::searchItem($request->name)->orderBy('nama_barang')->get();
         return response()->json($barangs);
     }
 

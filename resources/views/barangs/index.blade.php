@@ -23,9 +23,9 @@
                     <thead>
                         <tr>
                             <th>No.</th>
-                            <th>Merek</th>
-                            <th>Jenis/Type</th>
                             <th>Nama Barang</th>
+                            <th>Jenis/Type</th>
+                            <th>Merek</th>
                             <th>Harga/Satuan</th>
                             <th>Stok Tersedia</th>
                             <th>Aksi</th>
@@ -35,9 +35,9 @@
                         @forelse ($barangs as $barang)
                         <tr>
                             <td>{{$loop->iteration}}</td>
-                            <td>{{$barang->merek}}</td>
-                            <td>{{$barang->jenis}}</td>
                             <td>{{$barang->nama_barang}}</td>
+                            <td>{{$barang->jenis}}</td>
+                            <td>{{$barang->merek}}</td>
                             <td>{{$barang->harga}} / {{$barang->satuan}}</td>
                             <td>{{$barang->stok}}</td>
                             <td>

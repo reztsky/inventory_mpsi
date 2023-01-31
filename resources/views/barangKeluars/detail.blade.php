@@ -40,7 +40,7 @@
                                             <tr>
                                                 <th>No.</th>
                                                 <th>Nama Barang</th>
-                                                <th>Jenis//Type</th>
+                                                <th>Jenis/Type</th>
                                                 <th>Merek</th>
                                                 <th>Jumlah</th>
                                                 <th>Sub. Total (Rp.)</th>
@@ -54,7 +54,7 @@
                                                     <td>{{$detail->barang->jenis}}</td>
                                                     <td>{{$detail->barang->merek}}</td>
                                                     <td>{{$detail->jumlah}}</td>
-                                                    <td>{{number_format($detail->sub_total,2,',','.')}}</td>
+                                                    <td>{{number_format($detail->sub_total,0,',','.')}}</td>
                                                 </tr>
                                             @endforeach
                                         </tbody>

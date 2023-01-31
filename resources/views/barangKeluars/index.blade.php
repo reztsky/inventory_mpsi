@@ -25,7 +25,7 @@
                             <th>Tanggal Kirim</th>
                             <th>No Transaksi</th>
                             <th>Tujuan</th>
-                            <th>Total Harga</th>
+                            <th>Total Harga (Rp.)</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -36,7 +36,7 @@
                                 <td>{{$barangKeluar['tanggal_keluar']}}</td>
                                 <td>{{$barangKeluar['no_transaksi']}}</td>
                                 <td>{{$barangKeluar['tujuan_kirim']}}</td>
-                                <td>{{$barangKeluar['total_harga']}}</td>
+                                <td>{{number_format($barangKeluar['total_harga'],0,',','.')}}</td>
                                 <td>
                                     <div class="gap-2">
                                         <a href="{{route('barangKeluar.show',$barangKeluar['id'])}}" class="btn-success btn btn-sm my-1 my-md-0">Detail</a>
