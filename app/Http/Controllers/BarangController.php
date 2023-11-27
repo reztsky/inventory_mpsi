@@ -17,9 +17,9 @@ class BarangController extends Controller
     function __construct()
     {
         $this->middleware('permission:barang-list|barang-create|barang-edit|barang-delete', ['only' => ['index','show']]);
-        $this->middleware('permission:barang-create', ['only' => ['create','store']]);
-        $this->middleware('permission:barang-edit', ['only' => ['edit','update']]);
-        $this->middleware('permission:barang-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:barang-create|stockOpname-create', ['only' => ['create','store']]);
+        $this->middleware('permission:barang-edit|stockOpname-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:barang-delete|stockOpname-delete', ['only' => ['destroy']]);
     }
 
     public function index()
