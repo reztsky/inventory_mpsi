@@ -8,6 +8,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ReportBarangKeluarController;
 use App\Http\Controllers\ReportBarangMasukController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\StockOpnameController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -86,6 +87,14 @@ Route::group([
         Route::get('/auto-complete','autoComplete')->name('autoComplete');
         Route::get('/export','export')->name('export');
     }); 
+
+    Route::group([
+        'as'=>'stockOpname.',
+        'controller'=>StockOpnameController::class,
+        'prefix'=>'/stock-opname',
+    ], function(){
+        Route::get('/','index')->name('index');
+    });
 
     Route::group([
         'as'=>'barangMasuk.',

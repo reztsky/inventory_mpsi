@@ -18,8 +18,8 @@ class DashboardServices{
                 ->selectRaw("date_format(barang_masuks.tanggal_diterima,'{$groupBy['month']} %Y') as periode")
                 ->selectRaw("sum(detail_barang_masuks.jumlah) as jumlah")
                 ->join('barang_masuks','barang_masuks.id','=','detail_barang_masuks.barang_masuk_id')
-                ->groupBy("periode")
-                ->orderBy('barang_masuks.tanggal_diterima','desc')
+                ->groupByRaw("DATE_FORMAT(barang_masuks.tanggal_diterima, '%M %Y')")
+                ->orderBy('periode','desc')
                 ->limit(10)
                 ->get();
     }
@@ -32,8 +32,8 @@ class DashboardServices{
                 // ->selectRaw("sum(detail_barang_keluars.jumlah) as jumlah")
                 ->selectRaw("sum(detail_barang_keluars.sub_total) as jumlah")
                 ->join('barang_keluars','barang_keluars.id','=','detail_barang_keluars.barang_keluar_id')
-                ->groupBy("periode")
-                ->orderBy('barang_keluars.tanggal_keluar','desc')
+                ->groupByRaw("DATE_FORMAT(barang_keluars.tanggal_keluar, '%M %Y')")
+                ->orderBy('periode','desc')
                 ->limit(10)
                 ->get();
 

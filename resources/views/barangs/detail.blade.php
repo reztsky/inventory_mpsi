@@ -17,7 +17,7 @@
                         Barang Detail
                     </div>
                     <div class="handle">
-                        <a class="btn btn-sm btn-danger" href="{{route('barang.index')}}">Kembali</a>
+                        <a class="btn btn-sm btn-danger" href="{{ url()->previous()}}">Kembali</a>
                     </div>
                 </div>
                 <hr>
