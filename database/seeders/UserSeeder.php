@@ -16,12 +16,12 @@ class UserSeeder extends Seeder
     public function run()
     {
         $user=User::create([
-            'name'=>'Sultan Aulia Alfarizki',
-            'nik'=>'3578160711980001',
+            'name'=>'Admin',
+            'nik'=>'3578160000000001',
             'jenis_kelamin'=>'L',
-            'alamat'=>'Sidotopo Sekolahan 10/21a',
-            'no_telfon'=>'085156261204',
-            'username'=>'sull_aa',
+            'alamat'=>'xyz',
+            'no_telfon'=>'0000000000',
+            'username'=>'admin',
             'password'=>'123456',
         ]);
 
