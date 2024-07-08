@@ -98,8 +98,11 @@
                                         <div class="col-md-6 col-12">
                                             <div class="mb-2">
                                                 <label for="" class="form-label">Barang</label>
+                                                <div class="spinner-border spinner-border-sm ms-1 d-none" id="loading" role="status">
+                                                    <span class="visually-hidden">Loading...</span>
+                                                  </div>
                                                 <input type="text" class="form-control search" id="search" name="search"
-                                                    placeholder="Barang" @keyup="searchBarang(index)"
+                                                    placeholder="Ketik Nama Barang" @keyup="searchBarang(index)"
                                                     @focusout="setBarangId(index)">
                                                 <input type="hidden" :id="'barang_id-'+index">
                                                 <input type="hidden" id="barang_id" class="barang_name"
@@ -167,7 +170,7 @@
             searchBarang(index){
                 var route="{{route('barang.autoComplete')}}"
                 var searchInput=$(`.search:eq(${index})`)
-
+                $('#loading').removeClass('d-none');
                 searchInput.autocomplete({
                     source:function(request,response){
                         $.ajax({
@@ -177,6 +180,7 @@
                             },
                             dataType:"json",
                             success:function(data){
+                                $('#loading').addClass('d-none');
                                 var resp=$.map(data,function(obj){
                                     return {
                                         value:obj.name,
@@ -190,7 +194,7 @@
                     },
                     select:function(event,ui){
                         $(`#barang_id-${index}`).val(ui.item.id)
-                        
+
                     }
                 })
             },
